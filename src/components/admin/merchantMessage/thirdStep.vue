@@ -329,8 +329,8 @@
             that.thirdForm.registerDate = '暂无' + '／' + that.thirdForm.date2
           }
           for (var i = 0; i < that.thirdForm.itemValueList.length; i++) {
-            that.thirdForm.itemValueList[i].tiChen = parseInt(that.thirdForm.itemValueList[i].tiChen)
-            that.thirdForm.itemValueList[i].itemQb = parseInt(that.thirdForm.itemValueList[i].itemQb)
+            // that.thirdForm.itemValueList[i].tiChen = parseInt(that.thirdForm.itemValueList[i].tiChen)
+            // that.thirdForm.itemValueList[i].itemQb = parseInt(that.thirdForm.itemValueList[i].itemQb)
             that.thirdForm.itemValueList[i].stockNum = parseInt(that.thirdForm.itemValueList[i].stockNum)
           }
           var itemInfo = {}
@@ -424,8 +424,8 @@
             that.thirdForm.registerDate = that.thirdForm.date1 + '／' + that.thirdForm.date2
           }
           for (var i = 0; i < that.thirdForm.itemValueList.length; i++) {
-            that.thirdForm.itemValueList[i].tiChen = parseInt(that.thirdForm.itemValueList[i].tiChen)
-            that.thirdForm.itemValueList[i].itemQb = parseInt(that.thirdForm.itemValueList[i].itemQb)
+            // that.thirdForm.itemValueList[i].tiChen = parseInt(that.thirdForm.itemValueList[i].tiChen)
+            // that.thirdForm.itemValueList[i].itemQb = parseInt(that.thirdForm.itemValueList[i].itemQb)
             that.thirdForm.itemValueList[i].stockNum = parseInt(that.thirdForm.itemValueList[i].stockNum)
           }
           var itemInfo = {}
