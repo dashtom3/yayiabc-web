@@ -246,6 +246,7 @@
         var obj = {};
         obj.currentPage = data;
         obj.numberPerpage = 10;
+        obj.state = 2;
         that.global.axiosPostReq('/OrderDetails/show',obj)
         .then((res) => {
           if (res.data.callStatus === 'SUCCEED') {
