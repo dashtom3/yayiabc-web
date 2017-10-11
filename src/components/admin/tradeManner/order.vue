@@ -642,7 +642,11 @@
             this.detailVisible = true;
             this.nowOrderDetails = res.data.data;
             var qbDes = this.nowOrderDetails.qbDes.split(',')
-            this.nowOrderDetails.qbDes = "'赠' " + qbDes[0] + '个；' + "'8.0折'' " + qbDes[1] + '个；' + "'9.0折'' " + qbDes[2] + '个；' + "'9.5折' " + qbDes[3]+ '个；'
+            if (qbDes[0] === '暂无') {
+              this.nowOrderDetails.qbDes = qbDes[0];
+            } else {
+              this.nowOrderDetails.qbDes = "'赠' " + qbDes[0] + '个；' + "'8.0折'' " + qbDes[1] + '个；' + "'9.0折'' " + qbDes[2] + '个；' + "'9.5折' " + qbDes[3]+ '个；'
+            }
             var num = 0;
             var allMoney = 0;
             var arr = [];
@@ -902,7 +906,8 @@
 .order_sum{
   position: absolute;
   right: 0;
-  top: -1px;
+  /* top: -1px; */
+  top: 35px;
   width: 30%;
   border-left: none;
   text-align: center;
@@ -913,7 +918,8 @@
 }
 .order_h{
   /*padding-top: 18px;*/
-  line-height: 31px;
+  /* line-height: 31px; */
+  line-height: 26px
 }
 .img_list{
   text-align: center;
