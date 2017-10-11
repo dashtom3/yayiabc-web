@@ -235,7 +235,8 @@
         width: 100% !important;
         border-radius: 0px;
         background-color: #333744;
-        overflow: scroll;
+        // overflow: scroll;
+        overflow: auto !important;
       }
       .collapsed {
         width: 50px;
