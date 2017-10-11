@@ -2,7 +2,9 @@ import axios from 'axios'
 import router from '../../router'
 
 export default {
+  //6181：测试服务器
   // baseUrl: 'http://47.93.48.111:6181/api',
+  //8080正式服务器
   baseUrl: 'http://47.93.48.111:8080/api',
   // baseUrl: 'http://123.56.220.72:8089/api',
   qiNiuUrl: 'http://upload-z2.qiniu.com/',
