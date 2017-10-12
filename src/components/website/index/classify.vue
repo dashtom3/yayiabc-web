@@ -5,11 +5,11 @@
       <span class="cargo_word">商品分类</span>
       <div v-show="!change1" class="classfyDetail" v-if="allClassfy.length>0">
         <div class="classfyDetail_left">
-          <div class="classfyDetail_li" :class="{oneHover:index1==defaultOne}" v-for="(one,index1) in allClassfy" v-on:mouseenter="getTwo(index1,one)" v-on:click="goToClassfy1(index1)">
+          <div class="classfyDetail_li" :class="{oneHover:index1==defaultOne}" v-for="(one,index1) in allClassfy" v-on:mouseenter="getTwo(index1,one)" v-on:click="goToClassfy1(index1)" :key="index1">
             <div class="classfyDetail_li_one">{{one.oneClassify}} > </div>
             <div class="details">
               <div class="title_box clearfix">
-                <div class="title" v-for="(two,index2) in one.classifyTwoList" v-on:click.stop="goToClassfy2(index2)">{{two.classifyTwoName}}</div>
+                <div class="title" v-for="(two,index2) in one.classifyTwoList" v-on:click.stop="goToClassfy2(index2)" :key="index2">{{two.classifyTwoName}}</div>
               </div>
             </div>
           </div>
@@ -31,7 +31,7 @@
 <!--       <img v-if="!change2" src="../../../images/index/up.png" alt="img">
       <img v-else src="../../../images/index/down.png" alt="img"> -->
       <div class="brandLib" style="display:block;"  v-if="!change2">
-        <div class="imgWrap" v-for="oneBrand in brandListData" @click="goToThisBrand(oneBrand.itemBrandId)">
+        <div class="imgWrap" v-for="oneBrand in brandListData" @click="goToThisBrand(oneBrand.itemBrandId)" :key="oneBrand.itemBrandId">
           <img :src="oneBrand.itemBrandLogo" alt="img">
           <span></span>
           <div></div>
@@ -68,7 +68,7 @@
         that.global.axiosGetReq('/item/showClassify').then((res) => {
           if (res.data.callStatus === 'SUCCEED') {
             this.allClassfy = res.data.data;
-            console.log(this.allClassfy,'opop')
+            // console.log(this.allClassfy,'opop')
           } else {
             that.$message.error('网络出错，请稍后再试！');
           }

@@ -120,7 +120,6 @@
             }
             // arr[3] = res.data.data.threeClassify;
             // arr[3] = res.data.data.itemName;
-            
             this.fenlei = arr;
             this.Classify = res.data.data;
           } else {

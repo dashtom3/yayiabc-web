@@ -12,6 +12,7 @@
         <!--<span @click="goThisBrand(firstClassfy,1)" class="showBlueColor" :class="{indexLine:!secondClassfy&&!thirdClassfy&&!haveBrand&&!searchWordFromIndex}" v-if="firstClassfy">{{firstClassfy}}</span>-->
         <span v-if="secondClassfy">></span>
         <span @click="goThisBrand(secondClassfy,2)" class="showBlueColor" :class="{indexLine:!haveBrand&&!searchWordFromIndex}" v-if="secondClassfy" >{{secondClassfy}}</span>
+        <span v-if="thirdClassfy">></span>
         <!--<span @click="goThisBrand(secondClassfy,2)" class="showBlueColor" :class="{indexLine:!thirdClassfy&&!haveBrand&&!searchWordFromIndex}" v-if="secondClassfy" >{{secondClassfy}}</span><span v-if="thirdClassfy">></span>-->
         <!--<span @click="goThisBrand(thirdClassfy,3)" class="showBlueColor" :class="{indexLine:!haveBrand&&!searchWordFromIndex}" v-if="thirdClassfy" >{{thirdClassfy}}</span><span v-if="haveBrand">></span>-->
         <span class="showBlueColor" :class="{indexLine:!searchWordFromIndex}" v-if="haveBrand" >{{haveBrand}}</span><span v-if="searchWordFromIndex">></span>
@@ -20,21 +21,21 @@
       <div class="classifyLine" >
         分类：
         <span class="defaultClassfy" :class="{qqqq:noLimitClassfy}" v-on:click="clearAllClassfy()">不限</span>
-          <span class="fenlei1" v-bind:class="{fenlieselect: classify1Index===index}" v-on:click="selectClassfy1(index,item)"  v-for="(item,index) in brandClassfy" :key="index">
-            {{item.oneClassify}}
-          </span>
-          <div class="classfyDetail" v-show="fenlie2.length>0">
-            <div class="towClassfy" >
-              <ul>
-                <li :class="{asdff:classify2Index==index}" v-on:click="selectClassfy2(index,item)" v-for="(item,index) in fenlie2" :key="index">{{item.classifyTwoName}}</li>
-              </ul>
-            </div>
-            <!--<div class="threeClassfy" v-show="fenlie3.length>0">-->
-              <!--<ul>-->
-                <!--<li :class="{asdff:classify3Index==index}" v-on:click="selectClassfy3(index,item)" v-for="(item,index) in fenlie3" :key="item.classifyThreeName">{{item.classifyThreeName}}</li>-->
-              <!--</ul>-->
-            <!--</div>-->
+        <span class="fenlei1" v-bind:class="{fenlieselect: classify1Index===index}" v-on:click="selectClassfy1(index,item)"  v-for="(item,index) in brandClassfy" :key="index">
+          {{item.oneClassify}}
+        </span>
+        <div class="classfyDetail" v-show="fenlie2.length>0">
+          <div class="towClassfy" >
+            <ul>
+              <li :class="{asdff:classify2Index==index}" v-on:click="selectClassfy2(index,item)" v-for="(item,index) in fenlie2" :key="index">{{item.classifyTwoName}}</li>
+            </ul>
           </div>
+          <!--<div class="threeClassfy" v-show="fenlie3.length>0">-->
+            <!--<ul>-->
+              <!--<li :class="{asdff:classify3Index==index}" v-on:click="selectClassfy3(index,item)" v-for="(item,index) in fenlie3" :key="item.classifyThreeName">{{item.classifyThreeName}}</li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        </div>
       </div>
       <div class="brandLine" >
         <span style="margin-top:11px">品牌：</span>
@@ -128,7 +129,7 @@
 //        classify3Index:null,
         firstClassfy:'',
         secondClassfy:'',
-//        thirdClassfy:'',
+        thirdClassfy:'',
         haveBrand:null,
         intBrandId:null,
         searchDataFromIndex:[],
@@ -320,10 +321,12 @@
         that.searchTwoStr = null;
 //        that.searchThreeStr = null;
         that.secondClassfy = null;
+        that.thirdClassfy = null;
 //        that.thirdClassfy = null;
         that.haveBrand = null;
         that.getNowClassfyAndBrandGoods(that.allGoodsOrderStyle);
         that.currentPage = 1;
+        that.brandNoLimitFn();
       },
       selectClassfy2:function(index,item){
         var that = this;
@@ -335,8 +338,9 @@
 //        that.searchThreeStr = null;
         that.getNowClassfyAndBrandGoods(that.allGoodsOrderStyle);
         that.currentPage = 1;
-//        that.thirdClassfy = null;
+        that.thirdClassfy = null;
         that.haveBrand = null;
+        that.brandNoLimitFn();
 //        if(item.classifyTwoName=="不限"){
 //          that.fenlie3 = [];
 //          that.secondClassfy = null;
@@ -359,6 +363,7 @@
         }
         that.brands[index].selected = true;
         that.brandNoLimit = false;
+        that.thirdClassfy = true
         that.searchBrandStr = item.itemBrandName;
         that.selectThisBrand = index;
         that.getNowClassfyAndBrandGoods(that.allGoodsOrderStyle);
