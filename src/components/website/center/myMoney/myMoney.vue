@@ -4,18 +4,18 @@
       <!-- <span>当前乾币：{{myAllMoney.currentMoney}}</span> -->
     </div>
     <el-table  :data="myAllMoney.details"  border  style="width: 100%;text-align:center;border-color:#dddddd;background-color:#f8f8f8;">
-    <el-table-column  label="收入" :resizable='false'  align="center">
+    <el-table-column  label="收入" :resizable='false' width="300"  align="center">
       <template scope="scope">
         <span class="colorBlue">{{scope.row.qbRget}}</span>
       </template>
     </el-table-column>
-    <el-table-column  label="支出" :resizable='false'  width="450"  align="center">
+    <el-table-column  label="支出" :resizable='false'  width="300"  align="center">
       <template scope="scope">
         <span class="colorRed">{{scope.row.qbRout}}</span>
       </template>
     </el-table-column>
-    <el-table-column  prop="remark" :resizable='false'  label="描述"  width="240"  align="center"></el-table-column>
-    <el-table-column  prop="qbTime" :resizable='false'  label="时间" width="174"  align="center"></el-table-column>
+    <el-table-column  prop="remark" :resizable='false'  label="描述"  width="300"  align="center"></el-table-column>
+    <el-table-column  prop="qbTime" :resizable='false'  label="时间"  align="center"></el-table-column>
   </el-table>
   <!-- <div class="fenyeWrap" v-if="childConfig.pageNum>1">
     <paging0 :childmsg="childConfig" v-on:childSay="msgFromChlid"></paging0>
@@ -150,9 +150,11 @@ import util from '../../../../common/util'
 }
 .colorBlue{
   color: #005aab;
+  font-size: 13px
 }
 .colorRed{
   color: #cb1700;
+  font-size: 13px
 }
 .fenyeWrap{
   padding-top: 40px;
@@ -179,5 +181,14 @@ import util from '../../../../common/util'
 }
 .myMoney .el-table--enable-row-hover .el-table__body tr:hover>td{
 background-color: #F2F2F2;
+}
+.myMoney .el-table .el-table__body-wrapper .cell{
+  font-size: 13px;
+}
+.el-table th>div{
+  padding: 0 9px;
+}
+.myMoney .el-table .cell{
+  padding: 2px 9px
 }
 </style>
