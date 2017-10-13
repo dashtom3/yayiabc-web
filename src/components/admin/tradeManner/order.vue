@@ -165,9 +165,8 @@
           </div>
         </div>
         <div class="pay_info clearfix">
-
           <ul class="fl" style="width:130px;">
-            <li>乾币抵扣</li>
+            <li>乾币抵扣明细</li>
             <li>支付方式</li>
             <li>发票</li>
             <li>产品注册证</li>
@@ -176,6 +175,7 @@
           </ul>
           <ul class="fl">
             <li>{{nowOrderDetails.qbDes}}</li>
+            <!-- <li><div class="money_wrapper"><img class="icon_money" src="../../../images/order/z.png" alt="图片无法显示"><i class="text">0</i><img class="icon_money" src="../../../images/order/9.5.png" alt="图片无法显示"><i class="text">0</i><img class="icon_money" src="../../../images/order/9.png" alt="图片无法显示"><i class="text">0</i><img class="icon_money" src="../../../images/order/8.png" alt="图片无法显示"><i class="text">0</i></div></li> -->
             <li>
               <div v-if="nowOrderDetails.payType==1">微信支付</div>
               <div v-else-if="nowOrderDetails.payType==0">支付宝支付</div>
@@ -645,7 +645,7 @@
             if (qbDes[0] === '暂无') {
               this.nowOrderDetails.qbDes = qbDes[0];
             } else {
-              this.nowOrderDetails.qbDes = "'赠' " + qbDes[0] + '个；' + "'8.0折'' " + qbDes[1] + '个；' + "'9.0折'' " + qbDes[2] + '个；' + "'9.5折' " + qbDes[3]+ '个；'
+              this.nowOrderDetails.qbDes = "'赠' " + qbDes[0] + '个；' + "'9.5折' " + qbDes[3] + '个；' + "'9.0折' " + qbDes[2] + '个；' + "'8折' " + qbDes[1]+ '个'
             }
             var num = 0;
             var allMoney = 0;
@@ -894,6 +894,7 @@
 }
 .order_box{
   position: relative;
+  min-height: 132px;
   border: 1px solid #eee;
 }
 .order_content{
@@ -920,6 +921,27 @@
   /*padding-top: 18px;*/
   /* line-height: 31px; */
   line-height: 26px
+}
+.pay_info li:nth-child(1){
+  margin-top: 18px
+}
+.money_wrapper{
+  height: 40px;
+  font-size: 0
+}
+.money_wrapper *{
+  display: inline-block;
+  line-height: 40px
+}
+.money_wrapper img{
+  margin-right: 7px;
+  vertical-align: middle;
+}
+.money_wrapper i{
+  margin-right: 29px;
+  vertical-align: top;
+  font-size: 20px;
+  color: rgb(102, 102, 102)
 }
 .img_list{
   text-align: center;

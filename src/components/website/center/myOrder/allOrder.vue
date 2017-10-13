@@ -142,6 +142,11 @@
           </div>
         </div>
       </div>
+      <div class="money_wrapper">
+        <p>
+          <span class="tipsTitle">乾币抵扣明细</span><img class="icon_money" src="../../../../images/order/z.png" alt="图片无法显示"><i class="text">{{qbDes[0]}}</i><img class="icon_money" src="../../../../images/order/9.5.png" alt="图片无法显示"><i class="text">{{qbDes[3]}}</i><img class="icon_money" src="../../../../images/order/9.png" alt="图片无法显示"><i class="text">{{qbDes[2]}}</i><img class="icon_money" src="../../../../images/order/8.png" alt="图片无法显示"><i class="text">{{qbDes[1]}}</i>
+        </p>
+      </div>
       <div>
         <p>
           <span class="tipsTitle">支付方式</span>
@@ -310,7 +315,8 @@
         getScore: false,
         dialogVisibleGetGood:false,
         dialogVisibleHaveALookAtWuLiu:false,
-        wuliuMsg: ''
+        wuliuMsg: '',
+        qbDes: []
       }
     },
     created: function() {
@@ -396,6 +402,11 @@
       lookOrderDetails:function(item){
         var that = this;
         that.nowOrderDetails = item;
+        that.qbDes = that.nowOrderDetails.qbDes.split(',')
+        if (that.qbDes[0] === '暂无') {
+          that.qbDes = [0,0,0,0];
+        }
+        console.log(that.qbDes)
         that.dialogVisibleToOrderDetails = true;
       },
       //显示所有订单
@@ -609,6 +620,7 @@
     .tipsTitle{
       display: inline-block;
       width: 100px;
+      margin-right: 20px;
     }
     .tipsContent{
       font-weight: normal;
@@ -870,6 +882,32 @@
 }
 .orderDetails div p:nth-child(2){
 color: #333333;
+}
+.money_wrapper{
+  font-size: 0
+}
+.el-dialog__body .orderDetails .money_wrapper p{
+  display: inline-block;
+  line-height: 40px;
+  margin: 0;
+  padding: 0;
+}
+.money_wrapper img{
+  margin-right: 7px;
+  vertical-align: middle;
+}
+.el-dialog__body .money_wrapper .tipsTitle{
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #48576a;
+}
+.money_wrapper i{
+  margin-right: 29px;
+  vertical-align: middle;
+  font-size: 20px;
+  font-weight: normal;
+  color: rgb(102, 102, 102)
 }
 .order_item{
   overflow: hidden;
