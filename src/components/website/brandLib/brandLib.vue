@@ -392,6 +392,7 @@
         that.searchBrandStr = null,
         that.brandNoLimit = true;
         that.selectThisBrand = null,
+        that.thirdClassfy = null;
         that.haveSelectedBrands = [];
         for(var i = 0;i<that.brands.length;i++){
           that.brands[i].selected = false;
@@ -430,9 +431,24 @@
 //          that.fenlie3 = [];
 //          that.classify3Index = 0;
           that.secondClassfy = null;
-//          that.thirdClassfy = null;
+          that.thirdClassfy = null;
+          // console.log(that.brandClassfy)
+          for (let i = 0; i < that.brandClassfy.length; i++){
+            if (that.brandClassfy[i].oneClassify === arg) {
+              that.selectClassfy1(i, that.brandClassfy[i])
+              // that.selectClassfy2(0, that.fenlie2[0])
+            }
+          }
         }else if(index==2) {
-            that.classify1Index = that.classify1Index;
+          for(let i in that.brands){
+            that.brands[i].selected = false;
+          }
+          that.brandNoLimit = true;
+          that.classify1Index = that.classify1Index;
+          // that.haveBrand = null;
+          // that.selectThisBrand = null;
+          // that.thirdClassfy = null;
+          that.brandNoLimitFn();
 //          that.classify3Index = 0;
 //          that.thirdClassfy = null;
         }
