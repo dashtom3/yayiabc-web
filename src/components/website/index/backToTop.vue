@@ -18,6 +18,11 @@
 <!--     <div class="qq_box">
       <a href="http://wpa.qq.com/msgrd?v=3&uin=2966679536&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:2966679536:52" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
     </div> -->
+    <div class="app_box" @mouseover="img_in4" @mouseout="img_out4">
+      <img v-if="hoverTop4" src="../../../images/index/app.png" alt="img"/>
+      <img v-else src="../../../images/index/app_hover.png" alt="img"/>
+      <img class="qr_hover" v-show="!hoverTop4" src="../../../images/index/qr_app.png" alt="img"/>
+    </div>
   </div>
 </template>
 
@@ -29,6 +34,7 @@
         hoverTop: true,
         hoverTop2: true,
         hoverTop3: true,
+        hoverTop4: true,
         top: true,
         contact: true,
       }
@@ -105,6 +111,14 @@
         var that = this;
         that.hoverTop3 = true;
       },
+      img_in4() {
+        var that = this;
+        that.hoverTop4 = false;
+      },
+      img_out4() {
+        var that = this;
+        that.hoverTop4 = true;
+      },
     }
   }
 </script>
@@ -160,5 +174,25 @@
   .qq_box:hover {
     opacity: 1;
     cursor: pointer;
+  }
+  .app_box {
+    width: 64px;
+    height: 46px;
+    padding: 5px;
+    font-size: 14px;
+    position: fixed;
+    bottom: 30px;
+    right:0px;
+    z-index: 999;
+    text-align: center;
+  }
+  .app_box:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+  .qr_hover{
+    position: fixed;
+    right: 78px;
+    bottom: 34px;
   }
 </style>
