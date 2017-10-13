@@ -60,7 +60,7 @@
     created:function(){
       var that = this;
       that.getAllBrandList();
-      this.getAllClassfyList();
+      that.getAllClassfyList();
     },
     methods: {
       getAllClassfyList:function(){
@@ -85,17 +85,17 @@
         }
         window.scroll(0,0);
       },
-        getAllBrandList:function(){
-          var that = this;
-          that.global.axiosGetReq('/item/brandList')
-          .then((res) => {
-            if (res.data.callStatus === 'SUCCEED') {
-              that.brandListData = res.data.data;
-            } else {
-              that.$message.error('网络出错，请稍后再试！');
-            }
-          })
-        },
+      getAllBrandList:function(){
+        var that = this;
+        that.global.axiosGetReq('/item/brandList')
+        .then((res) => {
+          if (res.data.callStatus === 'SUCCEED') {
+            that.brandListData = res.data.data;
+          } else {
+            that.$message.error('网络出错，请稍后再试！');
+          }
+        })
+      },
       cargo() {
         var that = this;
         that.change1 = false;

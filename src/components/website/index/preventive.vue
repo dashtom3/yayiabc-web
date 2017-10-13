@@ -98,7 +98,16 @@ export default {
   },
   computed: {
     filteredBrandListData: function () {
-      return this.brandListData.slice(0, 8)
+      let list = this.brandListData.slice(0, 8),
+        temp= []
+      list.forEach((item) => {
+        if (item.itemBrandName === "上海道邦") {
+          temp.unshift(item)
+        }else{
+          temp.push(item)
+        }
+      })
+      return temp
     },
     filteredBrandListData1: function () {
       return this.brandListData1.slice(8, 17)
