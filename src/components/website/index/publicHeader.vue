@@ -778,7 +778,7 @@
                 var obj = {
                     keyWord: that.searchCargo,
                 }
-                that.global.axiosPostReq('/item/itemSearch', obj).then((res) => {
+                that.global.axiosPostReq('/item/search', obj).then((res) => {
                     if (res.data.callStatus === 'SUCCEED') {
                         if (res.data.data.length !== 0) {
                             if (JSON.parse(that.global.getHistory()) == null) {

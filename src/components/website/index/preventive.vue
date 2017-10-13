@@ -117,7 +117,7 @@ export default {
           var obj = {
             oneClassify: that.classifyItems[i].oneClassify,
           };
-          that.global.axiosPostReq('/item/queryItemSearch', obj).then((res) => {
+          that.global.axiosPostReq('/item/search', obj).then((res) => {
             if (res.data.callStatus === 'SUCCEED') {
               if (res.data.data.length == 0) {
                 that.classifyItems[i].kong = 1
