@@ -79,7 +79,7 @@
             </div>
             <p class="goodTitle">{{item.itemName}}</p>
             <div class="goodBottom">
-              <span>￥{{item.itemPrice}}</span>
+              <span>￥{{item.itemPrice}}</span><span class="sale_count">销量:&nbsp;&nbsp;{{item.sales}}</span>
               <span><img src="../../../images/brandLib/5.png" alt="购物车"></span>
             </div>
           </li>
@@ -194,6 +194,7 @@
           if(that.seachDataFrombRrandLidPage){
             var length = that.seachDataFrombRrandLidPage.length;
             var arr = that.seachDataFrombRrandLidPage;
+            console.log(arr)
             var newarr = [];
             if(length>1){
               that.ifHaveData = true;
@@ -809,6 +810,11 @@ transition: all 0.5s ease;*/
   padding: 10px 20px;
 }
 .goodBottom span:nth-child(2){
+  margin-left: 20px;
+  font-size: 12px;
+  color: rgb(102, 102, 102);
+}
+.goodBottom span:nth-child(3){
   float: right;
 }
 .fenye{
