@@ -139,7 +139,8 @@
         </div>
         <div>
           <div>医师执业资格证：</div>
-          <img style="width:100px;height:100px;display:block" :src="someOneUserDetails.doctorPic" alt="医师执业资格证"  v-if="someOneUserDetails.doctorPic">
+          <img v-show="bigImgShow" @click="bigImgShow=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.doctorPic" alt="医师执业资格证"  v-if="someOneUserDetails.doctorPic">
+          <img v-show="!bigImgShow" @click="bigImgShow=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.doctorPic" alt="医师执业资格证"  v-if="someOneUserDetails.doctorPic">
           <span v-else>无</span>
         </div>
         <div>
@@ -253,7 +254,8 @@
           bindSales:[],
           address:[]
         },
-        salesList:[]
+        salesList:[],
+        bigImgShow: true
       }
     },
     created:function(){
