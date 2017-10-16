@@ -119,11 +119,11 @@
         <tr class="activeTable_title">
           <th class="type1" v-for="property in propertyList" v-if="property.propertyName">{{property.propertyName}}</th>
           <th class="skuCode">SKU代码</th>
-          <th class="price">价格</th>
+          <th class="price">*价格</th>
           <th class="percent">提成（%）</th>
           <th class="coin">乾币（%）</th>
-          <th class="stock">库存</th>
-          <th class="enable">是否启用</th>
+          <th class="stock">*库存</th>
+          <th class="enable">*是否启用</th>
         </tr>
         <tr class="activeTable_des" v-for="(table,index) in details.itemValueList" :key="table.itemPropertyInfo">
           <td v-if="table.itemPropertyInfo!==null&&table.itemPropertyInfo!==''">

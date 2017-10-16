@@ -66,11 +66,11 @@
       <table class="activeTable_box" v-show="no_active">
         <tr class="activeTable_title">
           <th class="skuCode">SKU代码</th>
-          <th class="price">价格</th>
+          <th class="price">*价格</th>
           <th class="percent">提成（%）</th>
           <th class="coin">乾币（%）</th>
-          <th class="stock">库存</th>
-          <th class="enable">是否启用</th>
+          <th class="stock">*库存</th>
+          <th class="enable">*是否启用</th>
         </tr>
         <tr class="activeTable_des">
           <td class="des_skuCode">
