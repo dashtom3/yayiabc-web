@@ -139,43 +139,51 @@
         </div>
         <div>
           <div>医师执业资格证：</div>
-          <img v-show="bigImgShow" @click="bigImgShow=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.doctorPic" alt="医师执业资格证"  v-if="someOneUserDetails.doctorPic">
-          <img v-show="!bigImgShow" @click="bigImgShow=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.doctorPic" alt="医师执业资格证"  v-if="someOneUserDetails.doctorPic">
+          <img v-show="bigImgShow1" @click="bigImgShow1=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.doctorPic" alt="医师执业资格证"  v-if="someOneUserDetails.doctorPic">
+          <img v-show="!bigImgShow1" @click="bigImgShow1=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.doctorPic" alt="医师执业资格证"  v-if="someOneUserDetails.doctorPic">
           <span v-else>无</span>
         </div>
         <div>
           <div>医疗机构执业许可证：</div>
-          <img style="width:100px;height:100px;display:block" :src="someOneUserDetails.medicalLicense" alt="医疗机构执业许可证" v-if="someOneUserDetails.medicalLicense">
+          <img v-show="bigImgShow2" @click="bigImgShow2=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.medicalLicense" alt="医疗机构执业许可证" v-if="someOneUserDetails.medicalLicense">
+          <img v-show="!bigImgShow2" @click="bigImgShow2=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.medicalLicense" alt="医疗机构执业许可证" v-if="someOneUserDetails.medicalLicense">
           <span v-else>无</span>
         </div>
         <div>
           <div>营业执照：</div>
-          <img style="width:100px;height:100px;display:block" :src="someOneUserDetails.businessLicense" alt="营业执照" v-if="someOneUserDetails.businessLicense">
+          <img v-show="bigImgShow3" @click="bigImgShow3=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.businessLicense" alt="营业执照" v-if="someOneUserDetails.businessLicense">
+          <img v-show="!bigImgShow3" @click="bigImgShow3=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.businessLicense" alt="营业执照" v-if="someOneUserDetails.businessLicense">
           <span v-else>无</span>
         </div>
         <div>
           <div>税务登记证：</div>
-          <img style="width:100px;height:100px;display:block" :src="someOneUserDetails.taxRegistration" alt="税务登记证" v-if="someOneUserDetails.taxRegistration">
+          <img v-show="bigImgShow4" @click="bigImgShow4=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.taxRegistration" alt="税务登记证" v-if="someOneUserDetails.taxRegistration">
+          <img v-show="!bigImgShow4" @click="bigImgShow4=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.taxRegistration" alt="税务登记证" v-if="someOneUserDetails.taxRegistration">
           <span v-else>无</span>
         </div>
         <div>
           <div>开户许可证：</div>
-          <img style="width:100px;height:100px;display:block" :src="someOneUserDetails.openingPermit" alt="开户许可证" v-if="someOneUserDetails.openingPermit">
+          <img v-show="bigImgShow5" @click="bigImgShow5=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.openingPermit" alt="开户许可证" v-if="someOneUserDetails.openingPermit">
+          <img v-show="!bigImgShow5" @click="bigImgShow5=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.openingPermit" alt="开户许可证" v-if="someOneUserDetails.openingPermit">
           <span v-else>无</span>
         </div>
         <div>
+          
           <div>放射诊疗许可证：</div>
-          <img style="width:100px;height:100px;display:block" :src="someOneUserDetails.radiologicalPermit" alt="放射诊疗许可证" v-if="someOneUserDetails.radiologicalPermit">
+          <img v-show="bigImgShow6" @click="bigImgShow6=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.radiologicalPermit" alt="放射诊疗许可证" v-if="someOneUserDetails.radiologicalPermit">
+          <img v-show="!bigImgShow6" @click="bigImgShow6=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.radiologicalPermit" alt="放射诊疗许可证" v-if="someOneUserDetails.radiologicalPermit">
           <span v-else>无</span>
         </div>
         <div>
           <div>法人身份证（正面）：</div>
-          <img style="width:100px;height:100px;display:block" :src="someOneUserDetails.idCardPositive" alt="法人身份证（正面）" v-if="someOneUserDetails.idCardPositive">
+          <img v-show="bigImgShow7" @click="bigImgShow7=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.idCardPositive" alt="法人身份证（正面）" v-if="someOneUserDetails.idCardPositive">
+          <img v-show="!bigImgShow7" @click="bigImgShow7=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.idCardPositive" alt="法人身份证（正面）" v-if="someOneUserDetails.idCardPositive">
           <span v-else>无</span>
         </div>
         <div>
           <div>法人身份证（反面）：</div>
-          <img style="width:100px;height:100px;display:block" :src="someOneUserDetails.idCardOtherside" alt="法人身份证（反面）" v-if="someOneUserDetails.idCardOtherside">
+          <img v-show="bigImgShow8" @click="bigImgShow8=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.idCardOtherside" alt="法人身份证（反面）" v-if="someOneUserDetails.idCardOtherside">
+          <img v-show="!bigImgShow8" @click="bigImgShow8=true" style="width:400px;height:400px;display:block" :src="someOneUserDetails.idCardOtherside" alt="法人身份证（反面）" v-if="someOneUserDetails.idCardOtherside">
           <span v-else>无</span>
         </div>
       </div>
@@ -255,12 +263,27 @@
           address:[]
         },
         salesList:[],
-        bigImgShow: true
+        bigImgShow1: true,
+        bigImgShow2: true,
+        bigImgShow3: true,
+        bigImgShow4: true,
+        bigImgShow5: true,
+        bigImgShow6: true,
+        bigImgShow7: true,
+        bigImgShow8: true
       }
     },
     created:function(){
       var that = this;
       that.queryHandler();
+      // that.bigImgShow1= true;
+      // that.bigImgShow2= true;
+      // that.bigImgShow3= true;
+      // that.bigImgShow4= true;
+      // that.bigImgShow5= true;
+      // that.bigImgShow6= true;
+      // that.bigImgShow7= true;
+      // that.bigImgShow8= true;
     },
     filters: {
       calculateUserType:function(data){

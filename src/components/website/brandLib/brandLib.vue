@@ -194,7 +194,6 @@
           if(that.seachDataFrombRrandLidPage){
             var length = that.seachDataFrombRrandLidPage.length;
             var arr = that.seachDataFrombRrandLidPage;
-            console.log(arr)
             var newarr = [];
             if(length>1){
               that.ifHaveData = true;
