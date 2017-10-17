@@ -117,7 +117,7 @@
       </div>
       <table class="activeTable_box" border="1">
         <tr class="activeTable_title">
-          <th class="type1" v-for="property in propertyList" v-if="property.propertyName">{{property.propertyName}}</th>
+          <th class="type1" v-for="(property, index) in propertyList" v-if="property.propertyName" :key="index">{{property.propertyName}}</th>
           <th class="skuCode">SKU代码</th>
           <th class="price">*价格</th>
           <th class="percent">提成（%）</th>
@@ -325,6 +325,8 @@
         currentPage: 1,
         //默认数据总数
         totalCount: 0,
+        // 保存currentPage
+        curPage: ''
       }
     },
     created: function() {
@@ -346,6 +348,7 @@
         var that = this
         that.currentPage = val
         that.search(val)
+        that.curPage = val
       },
       // 获取商品列表
       getItemInfo: function() {
@@ -608,7 +611,8 @@
           that.global.axiosPostReq('/item/up',obj).then((res) => {
             if (res.data.callStatus === 'SUCCEED') {
               // that.getItemInfo();
-              that.search();
+              // that.search();
+              that.handleCurrentChange(that.curPage)
               that.$message({
                 type: 'success',
                 message: '上架成功!'
@@ -638,7 +642,8 @@
           that.global.axiosPostReq('/item/down',obj).then((res) => {
             console.log(res,'xiajia')
             if (res.data.callStatus === 'SUCCEED') {
-              that.search();
+              // that.search();
+              that.handleCurrentChange(that.curPage)
               // that.getItemInfo();
               // that.clearWord();
               that.$message({
