@@ -145,7 +145,7 @@ import Bus from '../../global/bus.js'
     },
     watch: {
       goodDefaultNum() {
-        if (this.goodDefaultNum == '') {
+        if (this.goodDefaultNum == '' || this.goodDefaultNum <= 0) {
           this.goodDefaultNum = 1
         }
       }
