@@ -59,7 +59,8 @@
         currentView: 'tab01', //默认选中的导航栏
         dataValue: null,
         dataValue1: null,
-        dataValue2: null
+        dataValue2: null,
+        reLogData: '',
       }
     },
     components: {
@@ -93,7 +94,12 @@
           that.dataValue1 = '';
           that.dataValue2 = '';
         }
-      });  
+      });
+      if (that.$route.params.data == 'RE_LOGIN_SALE') {
+        that.reLogData = 'RE_LOGIN_SALE'
+        that.$message.error('登录过期，请重新登录！')
+        return false
+      }
     },
     methods: {
       getMsg: function (data) {

@@ -121,7 +121,7 @@ export default {
       }
       axios.post(this.baseUrl + url, formData)
         .then((res) => {
-          if (res.data.errorCode === 'RE_LOGIN') {
+          if (res.data.errorCode === 'RE_LOGIN' || res.data.errorCode === 'RE_LOGIN_SALE') {
             Promise.reject("登录过期，请重新登录！").then(function (reason) {
               // 未被调用
             }, function (reason) {
@@ -175,7 +175,7 @@ export default {
       }
       axios.get(this.baseUrl + url, {params: data})
         .then((res) => {
-          if (res.data.errorCode === 'RE_LOGIN') {
+          if (res.data.errorCode === 'RE_LOGIN' || res.data.errorCode === 'RE_LOGIN_SALE') {
             Promise.reject("登录过期，请重新登录！").then(function (reason) {
               // 未被调用
             }, function (reason) {
