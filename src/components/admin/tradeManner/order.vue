@@ -329,9 +329,9 @@
                   <el-input v-model="item.refunNum" :disabled="true" style="width:88px;position:absolute;left:60px;"></el-input>
                 </div>
               </td>
-              <td :rowspan="orderInfo.orderitemList.length" v-if="index == 0">{{orderInfo.refund.returnMoney}}</td>
-              <td :rowspan="orderInfo.orderitemList.length" v-if="index == 0">{{orderInfo.refund.returnQbMsg}}</td>
-              <td :rowspan="orderInfo.orderitemList.length" v-if="index == 0">{{orderInfo.refund.dedQb}}</td>
+              <td :rowspan="orderInfo.orderitemList.length">{{orderInfo.refund.returnMoney}}</td>
+              <td :rowspan="orderInfo.orderitemList.length">{{orderInfo.refund.returnQbMsg}}</td>
+              <td :rowspan="orderInfo.orderitemList.length">{{orderInfo.refund.dedQb}}</td>
             </tr>
           </table>
           <div class="btn_box">
