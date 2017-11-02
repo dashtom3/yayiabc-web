@@ -726,7 +726,7 @@
         if (res.data.callStatus === 'SUCCEED') {
           if(res.data.data.length>0){
             that.allQb = res.data.data[0].user.qbBalance;
-            that.nowQb = res.data.data[0].user.qbBalance;
+            that.nowQb = res.data.data[0].user.qbBalance < that.gwcTotal ? res.data.data[0].user.qbBalance : that.gwcTotal;
           } else {
             that.nowQb = 0
             that.allQb = 0
@@ -1381,7 +1381,7 @@
           receiverId: parseInt(that.receiverId), //收货地址id
           postFee: that.freight,
           isRegister: that.leave_word, //是否需要产品注册证
-          qbDed: that.qianbi_des, //钱币抵扣
+          qbDed: that.qianbi_des ? that.qianbi_des : 0, //钱币抵扣
           buyerMessage: that.leave_des, //买家留言
           giveQb: '',  //获得乾币
           orderItem: orderItem, //JSON数组
@@ -1401,7 +1401,8 @@
           // ordera: JSON.stringify( ordero ),
           // invoice: JSON.stringify( invoiceo ),
         }
-        console.log(obj,'90')
+        console.log(obj,'90');
+        console.log(orderItem,'90');
         that.global.axiosPostReq('/po/generaOrder', obj).then((res) => {
           if (res.data.callStatus === 'SUCCEED') {
             if (res.data.data == null) {
