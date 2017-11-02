@@ -564,7 +564,7 @@
           that.msPhone_alert = true
           return false
         } else {
-          var obj = {phone: that.ms_mobilephone}
+          var obj = {phone: that.ms_mobilephone, type: 2}
           that.global.axiosPostReq('/saleLog/getVerifyCode', obj)
             .then((res) => {
               // this.loading = false;
@@ -595,7 +595,7 @@
         if (that.fg_mobilephone == '' || !mb.test(that.fg_mobilephone)) {
           that.fgPhone_alert = true
         } else {
-          var obj = {phone: that.fg_mobilephone}
+          var obj = {phone: that.fg_mobilephone, type: 2}
           that.global.axiosPostReq('/saleLog/getVerifyCode', obj)
             .then((res) => {
               // this.loading = false;
@@ -626,7 +626,7 @@
         if (that.rg_mobilephone == '' || !mb.test(that.rg_mobilephone)) {
           that.rgPhone_alert = true
         } else {
-          var obj = {phone: that.rg_mobilephone}
+          var obj = {phone: that.rg_mobilephone, type: 2}
           that.global.axiosPostReq('/saleLog/getVerifyCode', obj)
             .then((res) => {
               // this.loading = false;

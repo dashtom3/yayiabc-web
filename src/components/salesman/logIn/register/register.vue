@@ -192,7 +192,7 @@
           return;
         } else {
           that.getPassword = true;
-        let params = {phone: that.registerData.phone};
+        let params = {phone: that.registerData.phone, type: 1};
         //
         this.global.axiosPostReq('/saleLog/getVerifyCode',params).then(res =>{
           for (let i = 0; i <= 60; i++) {

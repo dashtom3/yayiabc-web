@@ -260,7 +260,7 @@
           this.$message.error('请输入正确的手机号')
           return false
         } else {
-          var obj = { phone: rg_mobilephone }
+          var obj = { phone: rg_mobilephone, type: 1}
           that.global.axiosPostReq('/user/getVerifyCode', obj)
           .then((res) => {
             if (res.data.callStatus === 'SUCCEED') {

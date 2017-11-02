@@ -66,7 +66,7 @@ import global from '../global/global'
           return false
         } else {
           that.loading = true;
-          var obj = { phone: that.account.phone }
+          var obj = { phone: that.account.phone, type: 2}
           that.global.axiosPostReq('/user/getVerifyCode', obj).then((res) => {
             that.loading = false;
             if (res.data.callStatus === 'SUCCEED') {
