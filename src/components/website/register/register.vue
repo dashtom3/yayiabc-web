@@ -278,7 +278,7 @@
                 }, i * 1000)
               }
             }else if (res.data.errorCode === "Username_Already_Exist") {
-              Toast('该手机号已存在！请直接登录');
+               that.$message.error('该手机号已存在！请直接登录');
             }
           })
         }
