@@ -83,6 +83,8 @@ import global from '../global/global'
                   }
                 }, i * 1000)
               }
+            } else if (res.data.errorCode === "Username_Already_Exist") {
+              Toast('该手机号已存在！请直接登录');
             } else {
               that.$message.error('获取验证码失败！');
               that.loading = true;
