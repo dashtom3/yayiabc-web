@@ -106,7 +106,8 @@
         var that = this;
         if (that.isActive1 == true) {
           var obj = {
-            orderId: that.orderDetail.OrderId
+            orderId: that.orderDetail.OrderId,
+            refer: 1,  //支付的平台方式
           }
           that.global.axiosGetReq('/pay/payParames',obj).then((res) => {
             //console.log(res.request.responseURL,'pay')
@@ -124,7 +125,8 @@
                 return false
               }
               var obj = {
-                out_trade_no: that.orderDetail.OrderId
+                out_trade_no: that.orderDetail.OrderId,
+	            refer: 1,  //支付的平台方式
               }
               that.global.axiosGetReq('/weixin/checkOrderState',obj).then((res) => {
                 if (res.data.num == 2) {

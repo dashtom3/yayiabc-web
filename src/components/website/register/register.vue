@@ -293,8 +293,9 @@
 	    			let md5sum = crypto.createHash('md5')
 	          md5sum.update(this.registerData.pwd)
 	          let strPwd = md5sum.digest('hex')
+
 		        //个人
-		        if(this.registerData.type === 1){
+		        if(this.registerData.type == 1){
 		          params = {
 		            phone: this.registerData.phone,
 		            code: this.registerData.code,
@@ -303,11 +304,13 @@
 		            sex: this.registerData.sex,
 		            birthday: this.registerData.birthday ? util.formatDate.format(new Date(this.registerData.birthday)) : '1970-01-01'
 		          }
+		          console.log(this.registerData.imageUrl_doctorPic,'就看到了撒娇的快乐撒娇大');
 		          params['certification.type'] = this.registerData.type
 		          params['certification.companyName'] = this.registerData.companyName
 		          params['certification.part'] = this.registerData.part.join('/')
 		          params['certification.workAddress'] = this.registerData.workAddress
 		          params['certification.doctorPic'] = this.registerData.imageUrl_doctorPic
+                  console.log('dsadasdasdadadas');
 		        }else{
 		          //机构
 		          params = {
@@ -330,7 +333,9 @@
 		          params['certification.radiologicalPermit'] = this.registerData.imageUrl_treatment
 		          params['certification.idCardPositive'] = this.registerData.imageUrl_id_front
 		          params['certification.idCardOtherside'] = this.registerData.imageUrl_id_back
+
 		        }
+		        console.log(params,'收拾收拾');
 		        global.axiosPostReq('/app/register', params).then((res) => {
 		          if (res.data.callStatus === 'SUCCEED') {
 		            global.setToken(res.data.token)
