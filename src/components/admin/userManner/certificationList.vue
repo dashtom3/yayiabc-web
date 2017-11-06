@@ -1,4 +1,10 @@
 <template>
+
+    <div>
+    <div @click="popupSwitch = !popupSwitch" v-show="popupSwitch" class="popupBox">
+        <img class="popUpImg" :src="popSrc" alt="">
+    </div>
+
   <el-row class="certificationWarp">
     <el-col :span="24" class="warp-breadcrum">
       <el-breadcrumb separator="/">
@@ -42,47 +48,47 @@
         </li>
         <li :class={height_100:imgList.doctorPic} v-if="imgList.type === 1">
           <span>口腔执业医师资格证：</span>
-          <img :src="imgList.doctorPic" alt="口腔执业医师资格证" v-if="imgList.doctorPic">
+          <img @click="popup(imgList.doctorPic)"  :src="imgList.doctorPic" alt="口腔执业医师资格证" v-if="imgList.doctorPic">
           <i v-else>未设置</i>
         </li>
         <li :class={height_100:imgList.medicalLicense} v-if="imgList.type === 2">
           <span>医疗机构执业许可证：</span>
-          <img :src="imgList.medicalLicense"  alt="医疗机构执业许可证" v-if="imgList.medicalLicense">
+          <img @click="popup(imgList.medicalLicense)" :src="imgList.medicalLicense"  alt="医疗机构执业许可证" v-if="imgList.medicalLicense">
           <i v-else>未设置</i>
         </li>
         <li :class={height_100:imgList.businessLicense} v-if="imgList.type === 2">
           <span>营业执照：</span>
-          <img :src="imgList.businessLicense" alt="营业执照" v-if="imgList.businessLicense">
+          <img @click="popup(imgList.businessLicense)" :src="imgList.businessLicense" alt="营业执照" v-if="imgList.businessLicense">
           <i v-else>未设置</i>
         </li>
         <li :class={height_100:imgList.taxRegistration} v-if="imgList.type === 2">
           <span>税务登记证：</span>
-          <img :src="imgList.taxRegistration" alt="税务登记证" v-if="imgList.taxRegistration">
+          <img @click="popup(imgList.taxRegistration)" :src="imgList.taxRegistration" alt="税务登记证" v-if="imgList.taxRegistration">
           <i v-else>未设置</i>
         </li>
         <li :class={height_100:imgList.openingPermit} v-if="imgList.type === 2">
           <span>开户许可证：</span>
-          <img :src="imgList.openingPermit" alt="开户许可证" v-if="imgList.openingPermit">
+          <img @click="popup(imgList.openingPermit)" :src="imgList.openingPermit" alt="开户许可证" v-if="imgList.openingPermit">
           <i v-else>未设置</i>
         </li>
         <li :class={height_100:imgList.doctorPic} v-if="imgList.type === 2">
           <span>医师执业资格证：</span>
-          <img :src="imgList.doctorPic" alt="医师执业资格证" v-if="imgList.doctorPic">
+          <img @click="popup(imgList.doctorPic)" :src="imgList.doctorPic" alt="医师执业资格证" v-if="imgList.doctorPic">
           <i v-else>未设置</i>
         </li>
         <li :class={height_100:imgList.radiologicalPermit} v-if="imgList.type === 2">
           <span>放射诊疗许可证：</span>
-          <img :src="imgList.radiologicalPermit" alt="放射诊疗许可证" v-if="imgList.radiologicalPermit">
+          <img  @click="popup(imgList.radiologicalPermit)" :src="imgList.radiologicalPermit" alt="放射诊疗许可证" v-if="imgList.radiologicalPermit">
           <i v-else>未设置</i>
         </li>
         <li :class={height_100:imgList.idCardPositive} v-if="imgList.type === 2">
           <span>法人身份证（正面）：</span>
-          <img :src="imgList.idCardPositive" alt="法人身份证（正面）" v-if="imgList.idCardPositive">
+          <img  @click="popup(imgList.idCardPositive)" :src="imgList.idCardPositive" alt="法人身份证（正面）" v-if="imgList.idCardPositive">
           <i v-else>未设置</i>
         </li>
         <li :class={height_100:imgList.idCardOtherside} v-if="imgList.type === 2">
           <span>法人身份证（反面）：</span>
-          <img :src="imgList.idCardOtherside" alt="法人身份证（反面）" v-if="imgList.idCardOtherside">
+          <img @click="popup(imgList.idCardOtherside)" :src="imgList.idCardOtherside" alt="法人身份证（反面）" v-if="imgList.idCardOtherside">
           <i v-else>未设置</i>
         </li>
         <li style="min-height: 60px;">
@@ -150,12 +156,15 @@
       </el-pagination>
     </div>
   </el-row>
+    </div>
 </template>
 <script>
   import global from '../../global/global'
   export default{
     data(){
       return {
+      	popSrc: '',
+	    popupSwitch: false,
         ifShowBigImg:false,
         showDetail: false,
         searchUserContent:"",
@@ -190,7 +199,12 @@
       this.search();
     },
     methods: {
-      changeHandler(val){
+    	//图片放大模态框
+	    popup (imgSrc){
+	    	this.popSrc = imgSrc;
+            this.popupSwitch = !this.popupSwitch;
+        },
+      changeHandler (val){
         if(val === '2'){
           this.failReason = ''
         }
@@ -317,6 +331,26 @@
   }
 </script>
 <style scoped>
+    .popUpImg{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        opacity: 2!important;
+        transform:translate(-50%,-50%);
+        -ms-transform:translate(-50%,-50%);	/* IE 9 */
+        -moz-transform:translate(-50%,-50%);	/* Firefox */
+        -webkit-transform:translate(-50%,-50%); /* Safari 和 Chrome */
+        -o-transform:translate(-50%,-50%);
+    }
+    .popupBox{
+        position: fixed;
+        top:0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 3000;
+        background-color: rgba(0,0,0,0.5);
+    }
   .height_100{
     height: 100px;
   }
