@@ -165,7 +165,7 @@
   .classfyDetail{
     width: 1200px;
     margin: 39px auto;
-    max-height: 450px;
+    max-height: 540px;
     position: absolute;
     top: 0;
     z-index: 5;
@@ -225,7 +225,10 @@
     width: 100%;
     float: left;
     color:white;
-    height: 450px;
+    height: 540px;
+    background-color: #fff;
+    /*border-left: 1px solid #EDEDED;*/
+    /*border-right: 1px solid #EDEDED;*/
   }
   .classfyDetail_li {
     width: 100%;

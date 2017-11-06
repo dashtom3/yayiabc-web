@@ -71,7 +71,7 @@
           <div class="calculator">
             <button class="addBtn" :class="{btnDef:goodDefaultNum===1}" v-on:click="reduceGoodNum()">-</button>
             <!-- <span>{{goodDefaultNum}}</span> -->
-            <input @input="oneGoodNumChange()" type="text" v-model="goodDefaultNum">
+            <input @input="oneGoodNumChange()" type="number" v-model="goodDefaultNum">
             <button v-if="nowGoodDetails.itemValueList" class="addBtn" :class="{btnDef:goodDefaultNum==nowGoodDetails.itemValueList[0].stockNum}" v-on:click="addGoodNum()" :disabled="noStock">+</button>
             <span v-if="!kuCunBuZu" class="kucunbuzu">(库存{{nowStock}}件)</span>
             <div class="clearFloat"></div>
@@ -805,5 +805,12 @@ import Bus from '../../global/bus.js'
   .btnDef{
     background: #e5e5e5 !important;
     cursor: default;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  input[type="number"]{
+    -moz-appearance: textfield;
   }
 </style>
