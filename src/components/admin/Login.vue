@@ -66,7 +66,7 @@ import global from '../global/global'
           return false
         } else {
           that.loading = true;
-          var obj = { phone: that.account.phone, type: 2}
+          var obj = { phone: that.account.phone}
           that.global.axiosPostReq('/user/getVerifyCode', obj).then((res) => {
             that.loading = false;
             if (res.data.callStatus === 'SUCCEED') {
@@ -83,8 +83,6 @@ import global from '../global/global'
                   }
                 }, i * 1000)
               }
-            } else if (res.data.errorCode === "Username_NOT_Exist") {
-                that.$message.error('手机号还未注册，请先注册');
             } else {
               that.$message.error('获取验证码失败！');
               that.loading = true;
