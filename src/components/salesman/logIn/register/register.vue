@@ -182,9 +182,9 @@
         this.registerData.sex = i;
       },
       GetPassword(){
-        if(this.getPassword){
-          return
-        }
+        // if(this.getPassword){
+        //   return
+        // }
         let that = this;
         let mb = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
         if (that.registerData.phone === '' || !mb.test(that.registerData.phone)) {
@@ -192,9 +192,14 @@
           return;
         } else {
           that.getPassword = true;
-        let params = {phone: that.registerData.phone, type: 1};
+        let params = {phone: that.registerData.phone, type: 3};
         //
         this.global.axiosPostReq('/saleLog/getVerifyCode',params).then(res =>{
+          if (res.data.errorCode === "Username_Already_Exist") {
+              that.$message.error('该手机号已存在！请直接登录');
+              that.getPassword = false;
+              return
+          }
           for (let i = 0; i <= 60; i++) {
             window.setTimeout(function () {
               if (that.sec != 0) {

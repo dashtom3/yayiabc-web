@@ -564,7 +564,7 @@
           that.msPhone_alert = true
           return false
         } else {
-          var obj = {phone: that.ms_mobilephone, type: 2}
+          var obj = {phone: that.ms_mobilephone, type: 4}
           that.global.axiosPostReq('/saleLog/getVerifyCode', obj)
             .then((res) => {
               // this.loading = false;
@@ -582,6 +582,8 @@
                     }
                   }, i * 1000)
                 }
+              } else if (res.data.errorCode === "Username_NOT_Exist") {
+                that.$message.error('手机号还未注册，请先注册');
               } else {
                 that.$message.error('获取验证码失败！');
               }
@@ -595,7 +597,7 @@
         if (that.fg_mobilephone == '' || !mb.test(that.fg_mobilephone)) {
           that.fgPhone_alert = true
         } else {
-          var obj = {phone: that.fg_mobilephone, type: 2}
+          var obj = {phone: that.fg_mobilephone, type: 4}
           that.global.axiosPostReq('/saleLog/getVerifyCode', obj)
             .then((res) => {
               // this.loading = false;
@@ -613,6 +615,8 @@
                     }
                   }, i * 1000)
                 }
+              } else if (res.data.errorCode === "Username_NOT_Exist") {
+                that.$message.error('手机号还未注册，请先注册');
               } else {
                 that.$message.error('获取验证码失败！');
               }
@@ -626,7 +630,7 @@
         if (that.rg_mobilephone == '' || !mb.test(that.rg_mobilephone)) {
           that.rgPhone_alert = true
         } else {
-          var obj = {phone: that.rg_mobilephone, type: 2}
+          var obj = {phone: that.rg_mobilephone, type: 3}
           that.global.axiosPostReq('/saleLog/getVerifyCode', obj)
             .then((res) => {
               // this.loading = false;
@@ -644,9 +648,11 @@
                     }
                   }, i * 1000)
                 }
-              } else {
-                that.$message.error('获取验证码失败！');
-              }
+                } else if (res.data.errorCode === "Username_Already_Exist") {
+                    that.$message.error('该手机号已存在！请直接登录');
+                } else {
+                    that.$message.error('获取验证码失败！');
+                }
             })
         }
       },

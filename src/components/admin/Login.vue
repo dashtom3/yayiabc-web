@@ -83,8 +83,8 @@ import global from '../global/global'
                   }
                 }, i * 1000)
               }
-            } else if (res.data.errorCode === "Username_Already_Exist") {
-               that.$message.error('该手机号已存在！请直接登录');
+            } else if (res.data.errorCode === "Username_NOT_Exist") {
+                that.$message.error('手机号还未注册，请先注册');
             } else {
               that.$message.error('获取验证码失败！');
               that.loading = true;
