@@ -305,6 +305,11 @@
           // that.quill1.insertText(1, 'Hello', 'bold', true);
           that.thirdForm.itemDesc = that.quill1.container.firstChild.innerHTML;
           that.thirdForm.itemUse = that.quill2.container.firstChild.innerHTML;
+          if (that.fileList[0] === undefined) {
+            that.$message('请上传一张图片');
+            that.saveLoading = false
+            return
+          }
           that.thirdForm.itemPica = that.fileList[0];
           that.thirdForm.itemPicb = that.fileList[1];
           that.thirdForm.itemPicc = that.fileList[2];
@@ -389,6 +394,7 @@
           }
           global.axiosPostReq('/item/addItem',itemInfo).then((res) => {
             if (res.data.callStatus === 'SUCCEED') {
+
               that.$message('保存成功！');
               that.saveLoading = false
               that.$router.push({ name: '商品信息管理', params:{ list: true, addMerchandise: false}});
