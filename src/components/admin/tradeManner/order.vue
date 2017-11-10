@@ -177,7 +177,8 @@
             <li>{{nowOrderDetails.qbDes}}</li>
             <!-- <li><div class="money_wrapper"><img class="icon_money" src="../../../images/order/z.png" alt="图片无法显示"><i class="text">0</i><img class="icon_money" src="../../../images/order/9.5.png" alt="图片无法显示"><i class="text">0</i><img class="icon_money" src="../../../images/order/9.png" alt="图片无法显示"><i class="text">0</i><img class="icon_money" src="../../../images/order/8.png" alt="图片无法显示"><i class="text">0</i></div></li> -->
             <li>
-              <div v-if="nowOrderDetails.payType==1">微信支付</div>
+              <div v-if="nowOrderDetails.payType==4">微信支付(公众号/网站)</div>
+              <div v-else-if="nowOrderDetails.payType==5">微信支付(app)</div>
               <div v-else-if="nowOrderDetails.payType==0">支付宝支付</div>
               <div v-else-if="nowOrderDetails.payType==2">银联支付</div>
               <div v-else-if="nowOrderDetails.payType==3">乾币支付</div>
@@ -641,6 +642,7 @@
           if (res.data.callStatus === 'SUCCEED') {
             this.detailVisible = true;
             this.nowOrderDetails = res.data.data;
+            console.log(this.nowOrderDetails)
             var qbDes = this.nowOrderDetails.qbDes.split(',')
             if (qbDes[0] === '暂无') {
               this.nowOrderDetails.qbDes = qbDes[0];

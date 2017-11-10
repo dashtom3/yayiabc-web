@@ -430,7 +430,7 @@
         }], //省市地址
         radio: null,
         diaTitle: '',
-        checked1: false,
+        checked1: true,
         checked2: false,
         checked3: false,
         addNewVisible: false,
@@ -460,7 +460,7 @@
         qianbi_des: '',
         qbdk: '0',
         tax_word: false,
-        qianbi_word: false,
+        qianbi_word: true,
         leave_des: '',
         xRegion: [],
         editAdd: {},
@@ -727,6 +727,8 @@
           if(res.data.data.length>0){
             that.allQb = res.data.data[0].user.qbBalance;
             that.nowQb = res.data.data[0].user.qbBalance < that.gwcTotal ? res.data.data[0].user.qbBalance : that.gwcTotal;
+            that.qianbi_des = that.nowQb;
+            that.qbDed();
           } else {
             that.nowQb = 0
             that.allQb = 0
