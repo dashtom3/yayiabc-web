@@ -92,7 +92,7 @@
       <!-- 发票详情 -->
       <el-dialog  title="发票详情" :visible.sync="lookAtFaPiaoWrap" size="tiny" >
         <ul v-if="thisOrderInvoice" class="invoiceDetails">
-          <li v-if="thisOrderInvoice.invoiceStyle"><span>发票类型：</span><span>{{thisOrderInvoice.invoiceStyle==1?"普通发票":"增值税发票"}}</span></li>
+          <li v-if="thisOrderInvoice.invoiceStyle"><span>发票类型：</span><span>{{thisOrderInvoice.invoiceStyle==0?"普通发票":"增值税发票"}}</span></li>
           <li v-if="thisOrderInvoice.invoiceState"><span>发票性质：</span><span>{{thisOrderInvoice.invoiceState==0?"个人":"公司"}}</span></li>
  <!--          <li v-if="thisOrderInvoice.invoiceState==0"><span>发票抬头：</span><span>{{thisOrderInvoice.invoiceHead}}</span></li> -->
 <!--           <li v-if="thisOrderInvoice.companyName"><span>单位名称：</span><span>{{thisOrderInvoice.companyName}}</span></li> -->
