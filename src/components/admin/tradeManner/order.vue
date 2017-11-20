@@ -93,10 +93,10 @@
       <el-dialog  title="发票详情" :visible.sync="lookAtFaPiaoWrap" size="tiny" >
         <ul v-if="thisOrderInvoice" class="invoiceDetails">
           <li v-if="thisOrderInvoice.invoiceStyle"><span>发票类型：</span><span>{{thisOrderInvoice.invoiceStyle==0?"普通发票":"增值税发票"}}</span></li>
-          <li v-if="thisOrderInvoice.invoiceState"><span>发票性质：</span><span>{{thisOrderInvoice.invoiceState==0?"个人":"公司"}}</span></li>
- <!--          <li v-if="thisOrderInvoice.invoiceState==0"><span>发票抬头：</span><span>{{thisOrderInvoice.invoiceHead}}</span></li> -->
-<!--           <li v-if="thisOrderInvoice.companyName"><span>单位名称：</span><span>{{thisOrderInvoice.companyName}}</span></li> -->
-          <li v-if="thisOrderInvoice.companyName"><span>{{thisOrderInvoice.invoiceState==0?"发票抬头":"发票抬头"}}：</span><span>{{thisOrderInvoice.companyName}}</span></li>
+          <li v-if="thisOrderInvoice.invoiceStyle == 0 && thisOrderInvoice.invoiceState"><span>发票性质：</span><span>{{thisOrderInvoice.invoiceState==0?"个人":"公司"}}</span></li>
+          <!-- <li v-if="thisOrderInvoice.invoiceStyle==0"><span>发票抬头：</span><span>{{thisOrderInvoice.invoiceHead}}</span></li> -->
+          <li v-if="thisOrderInvoice.invoiceStyle == 0 && thisOrderInvoice.companyName"><span>{{thisOrderInvoice.invoiceState==0?"发票抬头":"公司抬头"}}：</span><span>{{thisOrderInvoice.companyName}}</span></li>
+          <li v-if="thisOrderInvoice.invoiceStyle == 1 && thisOrderInvoice.companyName"><span>单位名称：</span><span>{{thisOrderInvoice.companyName}}</span></li>
           <li v-if="thisOrderInvoice.taxpayerNum"><span>纳税人识别号：</span><span>{{thisOrderInvoice.taxpayerNum}}</span></li>
 
           <li v-if="thisOrderInvoice.registeredAddress"><span>注册地址：</span><span>{{thisOrderInvoice.registeredAddress}}</span></li>
@@ -178,6 +178,7 @@
             <!-- <li><div class="money_wrapper"><img class="icon_money" src="../../../images/order/z.png" alt="图片无法显示"><i class="text">0</i><img class="icon_money" src="../../../images/order/9.5.png" alt="图片无法显示"><i class="text">0</i><img class="icon_money" src="../../../images/order/9.png" alt="图片无法显示"><i class="text">0</i><img class="icon_money" src="../../../images/order/8.png" alt="图片无法显示"><i class="text">0</i></div></li> -->
             <li>
               <div v-if="nowOrderDetails.payType==4">微信支付(公众号/网站)</div>
+              <div v-else-if="nowOrderDetails.payType==1">微信支付</div>
               <div v-else-if="nowOrderDetails.payType==5">微信支付(app)</div>
               <div v-else-if="nowOrderDetails.payType==0">支付宝支付</div>
               <div v-else-if="nowOrderDetails.payType==2">银联支付</div>
@@ -359,7 +360,7 @@
         wuliuList:[
           {value:"STO",label:"申通快递"},
           {value:"SF",label:"顺丰快递"},
-          {value:"DB",label:"德邦快递"}
+          {value:"DBL",label:"德邦快递"}
         ],
         wacthTuiKuanList:[],
         pageProps:null,
@@ -509,6 +510,7 @@
           if (res.data.callStatus === 'SUCCEED') {
             that.lookAtFaPiaoWrap = true;
             that.thisOrderInvoice = res.data.data
+            console.log(that.thisOrderInvoice)
           } else {
             that.$message.error('网络出错，请稍后再试！');
           }

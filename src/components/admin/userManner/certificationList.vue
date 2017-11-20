@@ -2,7 +2,7 @@
 
     <div>
     <div @click="popupSwitch = !popupSwitch" v-show="popupSwitch" class="popupBox">
-        <img class="popUpImg" :src="popSrc" alt="">
+        <img class="popUpImg" :src="popSrc" style="width:700px;height:700px;display:block;margin:auto;" alt="">
     </div>
 
   <el-row class="certificationWarp">
@@ -132,7 +132,7 @@
         <template scope="scope">
           <span v-if='scope.row.certification.state === 1'>待审核</span>
           <span v-else-if='scope.row.certification.state === 2'>审核通过</span>
-          <span v-else='scope.row.certification.state === 3'>审核不通过</span>
+          <span v-else-if='scope.row.certification.state === 3'>审核不通过</span>
         </template>
       </el-table-column>
       <el-table-column  label="操作"  align="center">

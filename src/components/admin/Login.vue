@@ -84,7 +84,7 @@ import global from '../global/global'
                 }, i * 1000)
               }
             } else {
-              that.$message.error('获取验证码失败！');
+              that.$message.error(res.data.msg);
               that.loading = true;
             }
           })

@@ -308,7 +308,9 @@
             that.endDate = ''
             for (var i = 0; i < that.moneyList.length; i++) {
               that.moneyList[i].time = that.moneyList[i].qbTime
-              that.moneyList[i].balance = "\"赠\":" + that.moneyList[i].user.qbBalance + '个；' + "\"8.0折\":" + that.moneyList[i].user.aQb + '个；' + "\"9.0折\":" + that.moneyList[i].user.bQb + '个；' + "\"9.5折\":" + that.moneyList[i].user.cQb + '个；'
+              console.log(12344)
+              that.moneyList[i].balance = that.moneyList[i].qbBalances
+              // that.moneyList[i].balance = "\"赠\":" + that.moneyList[i].user.qbBalance + '个；' + "\"8.0折\":" + that.moneyList[i].user.aQb + '个；' + "\"9.0折\":" + that.moneyList[i].user.bQb + '个；' + "\"9.5折\":" + that.moneyList[i].user.cQb + '个；'
             }
           } else {
             that.$message.error('网络出错，请稍后再试！');
@@ -341,7 +343,8 @@
               that.totalCount = res.data.totalNumber;
             for (var i = 0; i < that.moneyList.length; i++) {
               that.moneyList[i].time = that.moneyList[i].qbTime
-              that.moneyList[i].balance = "\"赠\":" + that.moneyList[i].user.qbBalance + '个；' + "\"8.0折\":" + that.moneyList[i].user.aQb + '个；' + "\"9.0折\":" + that.moneyList[i].user.bQb + '个；' + "\"9.5折\":" + that.moneyList[i].user.cQb + '个；'
+              that.moneyList[i].balance = that.moneyList[i].qbBalances
+              // that.moneyList[i].balance = "\"赠\":" + that.moneyList[i].user.qbBalance + '个；' + "\"8.0折\":" + that.moneyList[i].user.aQb + '个；' + "\"9.0折\":" + that.moneyList[i].user.bQb + '个；' + "\"9.5折\":" + that.moneyList[i].user.cQb + '个；'
             }
               that.startDate = ''
               that.endDate = ''
@@ -369,7 +372,8 @@
               that.totalCount = res.data.totalNumber;
             for (var i = 0; i < that.moneyList.length; i++) {
               that.moneyList[i].time = that.moneyList[i].qbTime
-              that.moneyList[i].balance = "\"赠\":" + that.moneyList[i].user.qbBalance + '个；' + "\"8.0折\":" + that.moneyList[i].user.aQb + '个；' + "\"9.0折\":" + that.moneyList[i].user.bQb + '个；' + "\"9.5折\":" + that.moneyList[i].user.cQb + '个；'
+              that.moneyList[i].balance = that.moneyList[i].qbBalances
+              // that.moneyList[i].balance = "\"赠\":" + that.moneyList[i].user.qbBalance + '个；' + "\"8.0折\":" + that.moneyList[i].user.aQb + '个；' + "\"9.0折\":" + that.moneyList[i].user.bQb + '个；' + "\"9.5折\":" + that.moneyList[i].user.cQb + '个；'
             }
             }
           })

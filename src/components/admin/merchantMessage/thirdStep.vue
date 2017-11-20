@@ -1,7 +1,7 @@
 <template>
   <div class="thirdStep" v-show="thirdStep">
     <div class="firstTitle">商品图片：(最多5个，至少添加一张图片)</div>
-    <el-upload class="upload-demo" :on-remove="handleRemove" :on-success="uploadFile" :data="qiNiuToken" :action="qiNiuUrl" :file-list="fileList2" list-type="picture" :disabled="enoughImg">
+    <el-upload class="upload-demo" :on-remove="handleRemove" :on-success="uploadFile" :data="qiNiuToken" :action="qiNiuUrl" :file-list="fileList2" list-type="picture" :disabled="false">
       <el-button size="small" type="primary" :disabled="enoughImg">添加图片</el-button>
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
     </el-upload>

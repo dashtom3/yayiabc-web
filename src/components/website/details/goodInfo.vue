@@ -209,10 +209,26 @@ import Bus from '../../global/bus.js'
               that.kuCunBuZu = false;
             }
             that.nowGoodSKUDefault();
+            that.oneSkuDefault();
           } else {
             // that.$message.error('网络出错，请稍后再试！');
           }
         })
+      },
+       // 只有一个sku默认选中
+      oneSkuDefault(){
+        let that = this;
+        let skuArr = [];
+        for(let i = 0;i < that.nowGoodDetails.itemValueList.length;i++){
+          skuArr.push(that.nowGoodDetails.itemValueList[i].itemSKU)
+        }
+        if(skuArr.length === 1){
+          for(let i = 0;i < that.items.length;i++){
+            if (that.items[i].propertyInfoList[0].data) {
+               that.changeAttSty(0,that.items[i],i)
+            }
+          }
+        }
       },
       oneGoodNumChange:function(){
           this.jiSuanKuCun();
@@ -251,6 +267,7 @@ import Bus from '../../global/bus.js'
       },
       //indexC 子数组第几位 item 数组第几行的数据  indexP  当前数组第几行
       changeAttSty:function(indexC,item,indexP){
+        console.log(indexC,item,indexP)
         var that = this;
         if (item.checkWhich == indexC) {
           that.nowGoodDetails.propertyList.splice(indexP,1,{propertyInfoList:item.propertyInfoList,propertyName:item.propertyName,checkWhich: null })

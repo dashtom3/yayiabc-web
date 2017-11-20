@@ -304,13 +304,11 @@
 		            sex: this.registerData.sex,
 		            birthday: this.registerData.birthday ? util.formatDate.format(new Date(this.registerData.birthday)) : '1970-01-01'
 		          }
-		          console.log(this.registerData.imageUrl_doctorPic,'就看到了撒娇的快乐撒娇大');
 		          params['certification.type'] = this.registerData.type
 		          params['certification.companyName'] = this.registerData.companyName
 		          params['certification.part'] = this.registerData.part.join('/')
 		          params['certification.workAddress'] = this.registerData.workAddress
 		          params['certification.doctorPic'] = this.registerData.imageUrl_doctorPic
-                  console.log('dsadasdasdadadas');
 		        }else{
 		          //机构
 		          params = {
@@ -328,7 +326,7 @@
 		          params['certification.doctorPic'] = this.registerData.imageUrl_doctor
 		          params['certification.medicalLicense'] = this.registerData.imageUrl_medical
 		          params['certification.businessLicense'] = this.registerData.imageUrl_business
-		          params['certification.taxRegistration'] = this.registerData.taxRegistration
+		          params['certification.taxRegistration'] = this.registerData.imageUrl_tax
 		          params['certification.openingPermit'] = this.registerData.imageUrl_open_permit
 		          params['certification.radiologicalPermit'] = this.registerData.imageUrl_treatment
 		          params['certification.idCardPositive'] = this.registerData.imageUrl_id_front

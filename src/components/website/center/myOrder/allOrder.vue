@@ -154,6 +154,8 @@
           <span class="tipsContent" v-else-if="nowOrderDetails.payType === 1">微信支付</span>
           <span class="tipsContent" v-else-if="nowOrderDetails.payType === 2">银联支付</span>
           <span class="tipsContent" v-else-if="nowOrderDetails.payType === 3">乾币支付</span>
+          <span class="tipsContent" v-else-if="nowOrderDetails.payType === 4">微信支付</span>
+          <span class="tipsContent" v-else-if="nowOrderDetails.payType === 5">微信支付</span>
           <span class="tipsContent" v-else>无</span>
         </p>
       </div>
@@ -190,8 +192,9 @@
       <el-dialog  title="发票详情" :visible.sync="lookAtFaPiaoWrap" size="tiny" >
         <ul v-if="thisOrderInvoice" class="invoiceDetails">
           <li v-if="thisOrderInvoice.invoiceStyle"><span>发票类型：</span><span>{{thisOrderInvoice.invoiceStyle==0?"普通发票":"增值税发票"}}</span></li>
-          <li v-if="thisOrderInvoice.invoiceState"><span>发票性质：</span><span>{{thisOrderInvoice.invoiceState==0?"个人":"公司"}}</span></li>
-          <li v-if="thisOrderInvoice.companyName"><span>{{thisOrderInvoice.invoiceState==0?"发票抬头":"发票抬头"}}：</span><span>{{thisOrderInvoice.companyName}}</span></li>
+          <li v-if="thisOrderInvoice.invoiceStyle == 0 && thisOrderInvoice.invoiceState"><span>发票性质：</span><span>{{thisOrderInvoice.invoiceState==0?"个人":"公司"}}</span></li>
+          <li v-if="thisOrderInvoice.invoiceStyle == 0 && thisOrderInvoice.companyName"><span>{{thisOrderInvoice.invoiceState==0?"发票抬头":"公司抬头"}}：</span><span>{{thisOrderInvoice.companyName}}</span></li>
+          <li v-if="thisOrderInvoice.invoiceStyle == 1 && thisOrderInvoice.companyName"><span>单位名称：</span><span>{{thisOrderInvoice.companyName}}</span></li>
           <li v-if="thisOrderInvoice.taxpayerNum"><span>纳税人识别号：</span><span>{{thisOrderInvoice.taxpayerNum}}</span></li>
 
           <li v-if="thisOrderInvoice.registeredAddress"><span>注册地址：</span><span>{{thisOrderInvoice.registeredAddress}}</span></li>
@@ -224,7 +227,8 @@
         <div class="wlxxRight">
           <ul>
             <li v-for="one in wuliuxinxi.Traces" :key="one.AcceptStation">
-              <span class="data">{{one.AcceptTime.split(" ")[0]}}</span>
+              <!-- <span class="data">{{one.AcceptTime.split(" ")[0]}}</span> -->
+              <span class="data">{{one.AcceptTime}}</span>
               <div class="placeWrap">
                 <span class="place">{{one.AcceptStation}}</span>
               </div>
@@ -365,6 +369,7 @@
         .then((res) => {
           if (res.data.callStatus === 'SUCCEED') {
             this.thisOrderInvoice = res.data.data
+            console.log(this.thisOrderInvoice)
             this.lookAtFaPiaoWrap = true
           }
         })
@@ -483,7 +488,7 @@
               case 'SF':
                 wuliuName = '顺丰快递'
                 break;
-              case 'DB':
+              case 'DBL':
                 wuliuName = '德邦快递'
                 break;
               default:

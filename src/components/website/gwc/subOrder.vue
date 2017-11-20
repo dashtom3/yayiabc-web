@@ -698,6 +698,7 @@
         let total = that.gwcTotal + that.freight
         if (that.allQb >= total) {
           that.nowQb = total
+          that.qianbi_des = that.nowQb;
         }
       }
     },
@@ -1317,6 +1318,7 @@
           if (res.data.callStatus === 'SUCCEED') {
             that.freight = res.data.data.postFee
             // console.log(that.freight,'选择地址时运费')
+            that.qbdk = that.nowQb;
           }
         })
       },
