@@ -45,50 +45,50 @@
       <div class="tatalSales">
         <span class="total-sale">总销售额： {{total_sale}}</span>
       </div>
-    </el-col>
 
-    <!--商品列表-->
-    <el-table :data="goodsList" border @sort-change="sortRefundHandler">
-      <el-table-column prop="itemName" label="商品名称+属性" width="220" align="center" >
-        <template scope="scope">
-          <span>{{scope.row.itemName}}</span>
-          <div>
-            <span>{{scope.row.itemPropertyInfo}}</span>
-            <span v-if="scope.row.itemPropertyTwoValue">;</span>
-            <span>{{scope.row.itemPropertyTwoValue}}</span>
-            <span v-if="scope.row.itemPropertyThreeValue">;</span>
-            <span>{{scope.row.itemPropertyThreeValue}}</span>
-            <span v-if="scope.row.itemPropertyFourValue">;</span>
-            <span>{{scope.row.itemPropertyFourValue}}</span>
-            <span v-if="scope.row.itemPropertyFiveValue">;</span>
-            <span>{{scope.row.itemPropertyFiveValue}}</span>
-            <span v-if="scope.row.itemPropertySixValue">;</span>
-            <span>{{scope.row.itemPropertySixValue}}</span>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column prop="itemSKU" label="sku代码" width="150" align="center" >
-      </el-table-column>
-      <el-table-column prop="itemBrandName" label="品牌名称" align="center" >
-      </el-table-column>
-      <el-table-column prop="price" label="价格（元）" align="center" >
-      </el-table-column>
-      <el-table-column prop="sales" label="销量" sortable="sales" align="center" >
-      </el-table-column>
-      <el-table-column prop="salesMoney" label="销售额（元）" sortable="salesMoney" width="160"  align="center" >
-      </el-table-column>
-      <el-table-column prop="refundNum" label="累计退款次数" sortable="refundNum" align="center">
-      </el-table-column>
-    </el-table>
-    <div class="block" style="position:absolute;top:650px;right:0;" v-show="this.totalCount > this.pagesize">
-      <el-pagination
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage"
-        :page-size="pagesize"
-        layout="prev, pager, next, jumper"
-        :total="totalCount">
-      </el-pagination>
-    </div>
+      <!--商品列表-->
+      <el-table :data="goodsList" border @sort-change="sortRefundHandler">
+        <el-table-column prop="itemName" label="商品名称+属性" width="220" align="center" >
+          <template scope="scope">
+            <span>{{scope.row.itemName}}</span>
+            <div>
+              <span>{{scope.row.itemPropertyInfo}}</span>
+              <span v-if="scope.row.itemPropertyTwoValue">;</span>
+              <span>{{scope.row.itemPropertyTwoValue}}</span>
+              <span v-if="scope.row.itemPropertyThreeValue">;</span>
+              <span>{{scope.row.itemPropertyThreeValue}}</span>
+              <span v-if="scope.row.itemPropertyFourValue">;</span>
+              <span>{{scope.row.itemPropertyFourValue}}</span>
+              <span v-if="scope.row.itemPropertyFiveValue">;</span>
+              <span>{{scope.row.itemPropertyFiveValue}}</span>
+              <span v-if="scope.row.itemPropertySixValue">;</span>
+              <span>{{scope.row.itemPropertySixValue}}</span>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="itemSKU" label="sku代码" width="150" align="center" >
+        </el-table-column>
+        <el-table-column prop="itemBrandName" label="品牌名称" align="center" >
+        </el-table-column>
+        <el-table-column prop="price" label="价格（元）" align="center" >
+        </el-table-column>
+        <el-table-column prop="sales" label="销量" sortable="sales" align="center" >
+        </el-table-column>
+        <el-table-column prop="salesMoney" label="销售额（元）" sortable="salesMoney" width="160"  align="center" >
+        </el-table-column>
+        <el-table-column prop="refundNum" label="累计退款次数" sortable="refundNum" align="center">
+        </el-table-column>
+      </el-table>
+      <div class="block" v-show="this.totalCount > this.pagesize">
+        <el-pagination
+          @current-change="handleCurrentChange"
+          :current-page.sync="currentPage"
+          :page-size="pagesize"
+          layout="prev, pager, next, jumper"
+          :total="totalCount">
+        </el-pagination>
+      </div>
+    </el-col>
   </el-row>
 </template>
 

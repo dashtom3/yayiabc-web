@@ -28,10 +28,11 @@
 	          <el-date-picker  v-model="value3"  type="daterange"  placeholder="选择时间范围" @change="selectDateHandler">  </el-date-picker>
         </el-form-item>
         <el-button type="primary" class="fl" @click="search()">查询</el-button>
+        <el-button class="fl" @click="exportOrder()">导出已查询的数据</el-button>
       </el-form>
 
       <!--列表-->
-       <el-table :data="orderList" border>
+      <el-table :data="orderList" border>
         <el-table-column prop="orderId" label="订单编号" width="180" align="center" ></el-table-column>
         <el-table-column prop="totalFee" label="总价（元）" width="120" align="center" ></el-table-column>
         <el-table-column prop="qbDed" label="乾币抵扣（元）" width="140" align="center" ></el-table-column>
@@ -73,12 +74,13 @@
         </el-table-column>
         <el-table-column prop="handle" label="操作" min-width="180" align="center" >
           <template scope="scope">
-            <el-button  size="mini"  type="info"  @click="getOneOrderDetailsById(scope.$index, scope.row)">详情</el-button>
-            <el-button  size="mini"  v-show='scope.row.state!=0&&scope.row.state!=4'  @click="handleClose(scope.$index, scope.row)">关闭交易</el-button>
-            <el-button  size="mini"  type="success"  v-show='scope.row.state === "2"'  @click="handleSure(scope.$index, scope.row)">确认订单</el-button>
-            <el-button  size="mini"  type="danger"  v-show='scope.row.state!=0 && scope.row.state!=1 && scope.row.refundInfo!="是"'  @click="handleDrawback(scope.$index, scope.row)">退款处理</el-button>
-            <el-button  size="mini"  v-show='scope.row.refundInfo=="是"'  @click="lookAtTuiKuanOrder(scope.$index, scope.row)">查看退款</el-button>
-            <el-button  size="mini"  type="primary"  v-show='scope.row.state === "5"'  @click="handleDelivery(scope.$index, scope.row)">仓库发货</el-button>
+            <el-button size="mini" type="text" @click="getRechargeRecordById(scope.$index, scope.row)">充值记录</el-button>
+            <el-button size="mini" type="info"  @click="getOneOrderDetailsById(scope.$index, scope.row)">详情</el-button>
+            <el-button size="mini" v-show='scope.row.state!=0&&scope.row.state!=4'  @click="handleClose(scope.$index, scope.row)">关闭交易</el-button>
+            <el-button size="mini" type="success"  v-show='scope.row.state === "2"'  @click="handleSure(scope.$index, scope.row)">确认订单</el-button>
+            <el-button size="mini" type="danger"  v-show='scope.row.state!=0 && scope.row.state!=1 && scope.row.refundInfo!="是"'  @click="handleDrawback(scope.$index, scope.row)">退款处理</el-button>
+            <el-button size="mini" v-show='scope.row.refundInfo=="是"'  @click="lookAtTuiKuanOrder(scope.$index, scope.row)">查看退款</el-button>
+            <el-button size="mini" type="primary"  v-show='scope.row.state === "5"'  @click="handleDelivery(scope.$index, scope.row)">仓库发货</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -106,14 +108,63 @@
           <li v-if="thisOrderInvoice.stickNanme"><span>收票人姓名：</span><span>{{thisOrderInvoice.stickNanme}}</span></li>
           <li v-if="thisOrderInvoice.stickPhone"><span>收票人手机号：</span><span>{{thisOrderInvoice.stickPhone}}</span></li>
           <li v-if="thisOrderInvoice.stickaddress"><span>收票人地址：</span><span>{{thisOrderInvoice.stickaddress}}</span></li>
-
-
         </ul>
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="lookAtFaPiaoWrap = false">关 闭</el-button>
         </span>
       </el-dialog>
-
+       <!--充值界面-->
+      <el-dialog title="充值记录" class="recharge" v-model="rechargeVisible" :close-on-click-modal="true" :before-close="handleCloseRecharge">
+        <el-form label-width="80px" class="clearfix">
+          <el-form-item label="充值类型" class="fl">
+            <el-select v-model="rechargeTypeValue"  class="t_select_width">
+              <el-option v-for="item in rechargeType" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="支付方式" class="fl">
+            <el-select v-model="rechargePayTypeValue" class="fl t_select_width teshu">
+              <el-option v-for="item in rechargePayType" :key="item.value" :label="item.label" :value="item.value"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="充值时间" class="fl" style="width:300px;margin-right:12px;">
+              <el-date-picker  v-model="rechargeValue"  type="daterange"  placeholder="选择时间范围" @change="selectDateRecharge">  </el-date-picker>
+          </el-form-item>
+          <el-button type="primary" class="fl" @click="searchRecharge()">查询</el-button>
+          <el-button class="fl" @click="exportRecharge()">导出已查询的数据</el-button>
+        </el-form>
+        <el-table :data="rechargeData" border style="width: 100%">
+          <el-table-column align="center" label="充值类型" width="180">
+            <template scope="scope">
+              <span>{{scope.row.qbRget.split(':')[0]}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="充值个数" width="180">
+            <template scope="scope">
+              <span>{{scope.row.qbRget.split(':')[1]}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="充值金额">
+            <template scope="scope">
+              <span>{{scope.row.qbRget.substring(1, scope.row.qbRget.split(':')[0].length-3) * scope.row.qbRget.split(':')[1].substring(0, scope.row.qbRget.split(':')[1].length-1)}}元</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="referer" label="支付方式">
+            <template scope="scope">
+              <span v-if="scope.row.referer == '1'">支付宝支付</span>
+              <span v-if="scope.row.referer == '4'">微信支付（全部）</span>
+              <span v-if="scope.row.referer == '2'">微信支付（公众号/网站）</span>
+              <span v-if="scope.row.referer == '3'">微信支付（APP）</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="qbTime" label="充值时间"></el-table-column>
+        </el-table>
+        <div class="block" v-show="orderList.length>0">
+          <!-- 分页 -->
+          <el-pagination @current-change="rechargeCurrentChange" :current-page.sync="rechargeCurrentPage" :page-size="pagesize" layout="prev, pager, next, jumper" :total="rechargeTotalCount" v-show="rechargeTotalCount > pagesize">
+          </el-pagination>
+          <!-- 分页 -->
+        </div>
+      </el-dialog>
       <!--详情界面-->
       <el-dialog v-if="nowOrderDetails" title="订单详情" v-model="detailVisible" size="small" :close-on-click-modal="true" :before-close="handleCloseDetails">
         <h3 class="detail_h3">订单状态:<span style="padding-left:20px;">{{nowOrderDetails.state | frisco}}</span></h3>
@@ -388,6 +439,58 @@
             value1: '2',
             label1: '否'
         }],
+        // 充值类型
+        rechargeType: [
+          {
+            value: '',
+            label: '全部'
+          },
+          {
+            value: '0',
+            label: '9.5折'
+          },
+          // {
+          //   value: '1',
+          //   label: '9折'
+          // },
+          {
+            value: '1',
+            label: '8折'
+          }
+        ],
+         // 充值方式
+        rechargePayType: [
+          {
+            value: '',
+            label: '全部'
+          },
+          {
+            value: '1',
+            label: '支付宝支付'
+          },
+          {
+            value: '4',
+            label: '微信支付（全部）'
+          },
+          {
+            value: '3',
+            label: '微信支付（APP）'
+          },
+          {
+            value: '2',
+            label: '微信支付（公众号/网站）'
+          }
+        ],
+        rechargeData: [],
+        //充值记录的当前页
+        rechargeCurrentPage: 1,
+        rechargeTotalCount: '',
+        rechargeTypeValue: '全部',
+        rechargePayTypeValue: '全部',
+        rechargeValue: [],
+        rechargeCTime: '',
+        rechargeETime: '',
+        currentPhone: '',
         orderCode: '',//订单编号
         buyerInfo: '',//买家信息
         value: '全部',//订单状态的value
@@ -398,17 +501,18 @@
         // value3: [new Date(2017, 10, 10, 10, 10), new Date(2017, 10, 11, 10, 10)],//下单时间
         //订单列表
         orderList: [],
-          detailVisible: false,//详情界面开关
-          dialogVisible: false,//关闭开关
-          deliveryVisible: false,//仓库发货开关
-          refundVisible: false,//退款处理开关
-          //收货信息
-          receivingInfo: [{
-            userCode: 'xxxxxx',
-            userName: '张三',
-            localtion: '上海市静安区',
-            detailAddr: '共和新路街道洛川中路1100弄31号103（居委会）'
-          }],
+        rechargeVisible: false,
+        detailVisible: false,//详情界面开关
+        dialogVisible: false,//关闭开关
+        deliveryVisible: false,//仓库发货开关
+        refundVisible: false,//退款处理开关
+        //收货信息
+        receivingInfo: [{
+          userCode: 'xxxxxx',
+          userName: '张三',
+          localtion: '上海市静安区',
+          detailAddr: '共和新路街道洛川中路1100弄31号103（居委会）'
+        }],
         //订单信息
         orderInfo: {
           orderDate: '2017-05-27',
@@ -500,6 +604,15 @@
           this.orderETime = ''
         }
       },
+      selectDateRecharge(val){
+        if(val){
+          this.rechargeCTime = val.split(' - ')[0]
+          this.rechargeETime = val.split(' - ')[1]
+        }else{
+          this.rechargeCTime = ''
+          this.rechargeETime = ''
+        }
+      },
       lookAtFaPiaoFun:function(order){
         var that = this;
         var obj = {
@@ -515,6 +628,9 @@
             that.$message.error('网络出错，请稍后再试！');
           }
         })
+      },
+      handleCloseRecharge: function(){
+        this.rechargeVisible = false;
       },
       handleCloseDetails:function(){
         this.nowOrderDetails = null;
@@ -564,7 +680,8 @@
           if (res.data.callStatus === 'SUCCEED') {
             that.orderInfo = res.data.data;
             var qbDes = that.orderInfo.qbDes.split(',')
-            that.orderInfo.qbDes = "'赠' " + qbDes[0] + '个；' + "'8.0折'' " + qbDes[1] + '个；' + "'9.0折'' " + qbDes[2] + '个；' + "'9.5折' " + qbDes[3]+ '个；'
+            // that.orderInfo.qbDes = "'赠' " + qbDes[0] + '个；' + "'8.0折' " + qbDes[1] + '个；' + "'9.0折' " + qbDes[2] + '个；' + "'9.5折' " + qbDes[3]+ '个；'
+            that.orderInfo.qbDes = "'赠' " + qbDes[0] + '个；' + "'8.0折' " + qbDes[1] + '个；' + "'9.5折' " + qbDes[3]+ '个；'
             // console.log(that.orderInfo,'lihui')
           }
         })
@@ -634,6 +751,152 @@
           }
         })
       },
+      exportOrder(val) {
+        var that = this;
+        if (val == undefined || typeof(val) == 'object') {
+          this.currentPage = 1
+        } else {
+          this.currentPage = val
+        }
+        var obj = {};
+        obj.orderId = that.orderCode;
+        obj.buyerInfo = that.buyerInfo;
+        if(that.value === '全部'){
+          that.value = ''
+        }
+        obj.orderState = that.value;
+        if(this.orderCTime !== ''){
+          obj.orderCTime = this.orderCTime;
+          obj.orderETime = this.orderETime;
+        }else{
+          obj.orderCTime = '';
+          obj.orderETime = '';
+        }
+        // 退款状态
+        if(that.value1=="全部"){
+          obj.isRefund = "";
+        }else if(that.value1==1){
+          obj.isRefund = "是";
+        }else if(that.value1==2){
+          obj.isRefund = "否";
+        }
+        // obj.currentPage = ''
+        // obj.numberPerpage = ''
+        window.open(this.global.baseUrl+'/showUserOrderManage/exportExcel?orderId='+ obj.orderId+'&buyerInfo='+obj.buyerInfo+'&orderState='+obj.orderState+'&orderCTime='+obj.orderCTime+'&orderETime='+obj.orderETime+'&isRefund='+obj.isRefund)
+        // that.global.axiosPostReq('/showUserOrderManage/exportExcel',obj)
+        // .then((res) => {
+        //   if (res.data.callStatus === 'SUCCEED') {
+        //     return
+        //   }
+        // })
+      },
+      // 查询充值记录
+      rechargeCurrentChange(val) {
+        this.rechargeCurrentPage = val
+        this.searchRecharge(val)
+      },
+      searchRecharge:function(val){
+        var that = this;
+        if (val == undefined || typeof(val) == 'object') {
+          this.rechargeCurrentPage = 1
+        } else {
+          this.rechargeCurrentPage = val
+        }
+        var obj = {
+          userMessage: that.currentPhone,
+        };
+        if(that.rechargeTypeValue === '全部' || that.rechargeTypeValue === ''){
+          obj.QbType = ''
+        } else if (that.rechargeTypeValue == 0) {
+          obj.QbType = '9.5'
+        } else if (that.rechargeTypeValue == 1) {
+          obj.QbType = '8.0'
+        }
+        if(that.rechargePayTypeValue === "全部"){
+          that.rechargePayTypeValue = "";
+        }
+        obj.payType = that.rechargePayTypeValue
+        if(this.rechargeCTime !== ''){
+          obj.orderCTime = that.rechargeCTime
+          obj.orderETime = that.rechargeETime
+        } else {
+          obj.orderCTime = ''
+          obj.orderETime = ''
+        }
+        obj.currentPage = that.rechargeCurrentPage
+        obj.numberPerpage = that.pagesize
+        that.global.axiosPostReq('/userQbList/queryQbRecord',obj)
+        .then((res) => {
+          if (res.data.callStatus === 'SUCCEED') {
+            that.rechargeData = res.data.data;
+            that.rechargeCurrentPage = res.data.currentPage
+            that.rechargeTotalCount=res.data.totalNumber
+            return
+          }
+          that.rechargeData = [];
+        })
+      },
+      exportRecharge(val) {
+        var that = this;
+        if (val == undefined || typeof(val) == 'object') {
+          this.rechargeCurrentPage = 1
+        } else {
+          this.rechargeCurrentPage = val
+        }
+        var obj = {
+          userMessage: that.currentPhone,
+        };
+        if(that.rechargeTypeValue === '全部' || that.rechargeTypeValue === ''){
+          obj.QbType = ''
+        } else if (that.rechargeTypeValue == 0) {
+          obj.QbType = '9.5'
+        } else if (that.rechargeTypeValue == 1) {
+          obj.QbType = '8.0'
+        }
+        if(that.rechargePayTypeValue === "全部"){
+          that.rechargePayTypeValue = '';
+        }
+        obj.payType = that.rechargePayTypeValue
+        if(this.rechargeCTime !== ''){
+          obj.orderCTime = that.rechargeCTime
+          obj.orderETime = that.rechargeETime
+        } else {
+          obj.orderCTime = ''
+          obj.orderETime = ''
+        }
+        obj.currentPage = ''
+        obj.numberPerpage = ''
+        window.open(this.global.baseUrl+'/userQbList/queryQbRecord?userMessage='+ obj.userMessage+'&QbType='+obj.QbType+'&payType='+obj.payType+'&orderCTime='+obj.orderCTime+'&orderETime='+obj.orderETime)
+        // that.global.axiosPostReq('/userQbList/queryQbRecord',obj)
+        // .then((res) => {
+        //   if (res.data.callStatus === 'SUCCEED') {
+        //     window.open(this.global.baseUrl + '/userQbList/queryQbRecord?benefitId='+ this.benefitIdSpan)
+        //   }
+        // })
+      },
+      getRechargeRecordById:function(index,oneOrder){
+        var that = this
+        that.rechargePayTypeValue = "全部"
+        that.rechargeTypeValue = '全部'
+        that.rechargeValue = [];
+        var obj = {
+          phone: oneOrder.phone,
+          adminToken: that.global.getAdminToken()
+        };
+        that.currentPhone = oneOrder.phone;
+        that.global.axiosPostReq('/showUserOrderManage/queryUserQbList',obj)
+        .then((res) => {
+          if (res.data.callStatus === 'SUCCEED') {
+            that.rechargeVisible = true;
+            if (res.data.data === null) {
+              return
+            }
+            that.rechargeData = res.data.data
+            that.rechargeCurrentPage = res.data.currentPage
+            that.rechargeTotalCount = res.data.totalNumber
+          }
+        })
+      },
       getOneOrderDetailsById:function(index,oneOrder){
         var that = this;
         var obj = {
@@ -649,7 +912,8 @@
             if (qbDes[0] === '暂无') {
               this.nowOrderDetails.qbDes = qbDes[0];
             } else {
-              this.nowOrderDetails.qbDes = "'赠' " + qbDes[0] + '个；' + "'9.5折' " + qbDes[3] + '个；' + "'9.0折' " + qbDes[2] + '个；' + "'8折' " + qbDes[1]+ '个'
+              // this.nowOrderDetails.qbDes = "'赠' " + qbDes[0] + '个；' + "'9.5折' " + qbDes[3] + '个；' + "'9.0折' " + qbDes[2] + '个；' + "'8折' " + qbDes[1]+ '个'
+              this.nowOrderDetails.qbDes = "'赠' " + qbDes[0] + '个；' + "'9.5折' " + qbDes[3] + '个；' + "'8折' " + qbDes[1]+ '个'
             }
             var num = 0;
             var allMoney = 0;
@@ -706,6 +970,7 @@
             // that.currentPage=res.data.currentPage;
             //默认数据总数
             that.totalCount=res.data.totalNumber;
+            that.search(that.currentPage)
           } else {
             that.$message.error('网络出错，请稍后再试！');
           }
@@ -776,7 +1041,6 @@
             res.data.data.untread = 0;//返回钱币
             res.data.data.outCoins = 0;//扣除钱币
             that.orderInfo = res.data.data;
-            console.log(that.orderInfo,'lihuo')
             this.refundVisible = true;
             this.wacthTuiKuanList = that.orderInfo.orderitemList;
           } else {
@@ -849,6 +1113,9 @@
   #inputCenter input{
     text-align: center;
   }
+  .recharge .el-dialog--small{
+    width: 52%;
+  }
 </style>
 <style scoped>
 .el-table th>.cell{
@@ -874,10 +1141,10 @@
 	display:block;
 }
 .t_input_width{
-	width:300px;
+	width:280px;
 }
 .t_select_width{
-	width:220px;
+	width:200px;
 }
 .t_data_width{
 	width:400px;
@@ -889,6 +1156,12 @@
   border-bottom:1px solid #ccc;
   margin-bottom:8px;
   padding-bottom:4px;
+}
+.recharge .t_select_width{
+	width:80px;
+}
+.recharge .teshu{
+	width:160px;
 }
 /*订单信息*/
 .order_header{

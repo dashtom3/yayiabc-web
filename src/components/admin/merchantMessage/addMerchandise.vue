@@ -68,7 +68,7 @@
           <th class="skuCode">SKU代码</th>
           <th class="price">*价格</th>
           <th class="percent">提成（%）</th>
-          <th class="coin">乾币（%）</th>
+          <th class="coin">*乾币</th>
           <th class="stock">*库存</th>
           <th class="enable">*是否启用</th>
         </tr>
@@ -99,7 +99,7 @@
           <th class="skuCode">SKU代码</th>
           <th class="price">价格</th>
           <th class="percent">提成（%）</th>
-          <th class="coin">乾币（%）</th>
+          <th class="coin">*乾币</th>
           <th class="stock">库存</th>
           <th class="enable">是否启用</th>
         </tr>
@@ -606,8 +606,8 @@
           }
           if (valid) {
             if (that.shopType !== '1') {
-              if (isNaN(that.input_price) || isNaN(that.input_stock) || that.input_price == '' || that.input_stock == '') {
-                that.$message.error('请填写完整商品资料！价格，库存不能为空');
+              if (isNaN(that.input_price) || isNaN(that.input_coin) || isNaN(that.input_stock) || that.input_price == '' || that.input_stock == '' || that.input_coin == '') {
+                that.$message.error('请填写完整商品资料！价格，乾币，库存不能为空');
                 return false
               }
               var obj = {

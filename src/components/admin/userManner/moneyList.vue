@@ -125,10 +125,12 @@
         }, {
           value: 'c_qb',
           label: '9.5折'
-        }, {
-          value: 'b_qb',
-          label: '9折'
-        }, {
+        }, 
+        // {
+        //   value: 'b_qb',
+        //   label: '9折'
+        // },
+        {
           value: 'a_qb',
           label: '8折'
         }],

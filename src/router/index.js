@@ -64,6 +64,7 @@ const SecondStep = resolve => require(['@/components/admin/merchantMessage/secon
 
 //交易管理
 const TradeManner_order = resolve => require(['@/components/admin/tradeManner/order'], resolve)
+const TradeManner_recharge = resolve => require(['@/components/admin/tradeManner/recharge'], resolve)
 const TradeManner_evaluate = resolve => require(['@/components/admin/tradeManner/evaluate'], resolve)
 
 // 用户管理
@@ -233,6 +234,7 @@ let router = new Router({
       iconCls: 'iconfont icon-menuunfold', // 图标样式class
       children: [
         {path: '/admin/tradeManner/order', component: TradeManner_order, name: '订单管理', menuShow: true},
+        {path: '/admin/tradeManner/recharge', component: TradeManner_recharge, name: '充值记录', menuShow: true},
         {path: '/admin/tradeManner/evaluate', component: TradeManner_evaluate, name: '评价管理', menuShow: true}
       ]
     },

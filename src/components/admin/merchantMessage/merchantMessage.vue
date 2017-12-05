@@ -73,7 +73,7 @@
               <el-button size="small" @click="edit(scope)">编辑</el-button>
               <el-button size="small" @click="preview(scope)">预览</el-button>
               <el-button size="small" @click="grounding(scope)">上架</el-button>
-              <el-button size="small" type="danger" @click="remove(scope)">删除</el-button>
+              <!-- <el-button size="small" type="danger" @click="remove(scope)">删除</el-button> -->
             </div>
           </template>
         </el-table-column>
@@ -121,7 +121,7 @@
           <th class="skuCode">SKU代码</th>
           <th class="price">*价格</th>
           <th class="percent">提成（%）</th>
-          <th class="coin">乾币（%）</th>
+          <th class="coin">*乾币</th>
           <th class="stock">*库存</th>
           <th class="enable">*是否启用</th>
         </tr>
