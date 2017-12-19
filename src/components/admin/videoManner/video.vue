@@ -6,7 +6,6 @@
       </el-breadcrumb>
     </el-col>
     <el-button type="primary" class="add_btn" @click="videoAddHandler">+添加视频</el-button>
-
     <!--视频列表-->
     <el-table :data="videoList" border>
       <el-table-column prop="vidName" label="视频" :span="8" align="center">
@@ -26,9 +25,7 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <!-- 添加视频 -->
-    					 
+    <!-- 添加视频 -->	 
     <el-dialog :title="!isEdit? '添加视频':'修改视频'" size="tiny" v-model="videoVisible" :close-on-click-modal="true">
 	    <ul class="video_wrap">
 		    <li class="clearfix">
@@ -175,7 +172,6 @@
 	            this.$message.error('添加失败！');
 	          }
 	        })
-	        
 				}else{
 					let params = {
 						viId: this.viId,

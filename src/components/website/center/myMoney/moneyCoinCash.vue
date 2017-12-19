@@ -17,11 +17,11 @@
                     <span class="fontColor">{{coinNum.aQb}}</span>
                     <i class="borderRight"></i>
                 </li>
-                <li>
+                <!-- <li>
                     <img class="coinImgBig" src="../../../../images/center/coinMoney9.png" alt="">
                     <span class="fontColor">{{coinNum.bQb}}</span>
                     <i class="borderRight"></i>
-                </li>
+                </li> -->
                 <li>
                     <img class="coinImgBig" src="../../../../images/center/coinMoney8.png" alt="">
                     <span class="fontColor">{{coinNum.cQb}}</span>
@@ -87,7 +87,7 @@
                     <img v-show="yesShow.aQb" class="liImgNo" src="../../../../images/center/yesCoin.png" alt="">
                 </li>
                 <!--3-->
-                <li :class="{'curous': already == true}" @click="selectCoinType('bQb')">
+                <!-- <li :class="{'curous': already == true}" @click="selectCoinType('bQb')">
                     <div class="secondUlFirstDiv">
                         <img class="coinImgSmall" src="../../../../images/center/coinMoney99.png" alt="">
                         <span class="fontSizeFirstSpan">(&nbsp;共{{coinNum.bQb}}个&nbsp;)</span>
@@ -103,7 +103,7 @@
                     </div>
                     <img v-show="!yesShow.bQb" class="liImgNo" src="../../../../images/center/noCoin.png" alt="">
                     <img v-show="yesShow.bQb" class="liImgNo" src="../../../../images/center/yesCoin.png" alt="">
-                </li>
+                </li> -->
                 <!--4-->
                 <li :class="{'curous': already == true}" @click="selectCoinType('cQb')">
                     <div class="secondUlFirstDiv">
@@ -279,27 +279,27 @@
 				coinNum: {
 					qbBalance: 0,
 					aQb: 0,
-					bQb: 0,
+					// bQb: 0,
 					cQb: 0,
 					sum: 0
 				},
 				tCoinNum: {
 					qbBalance: 0,
 					aQb: 0,
-					bQb: 0,
+					// bQb: 0,
 					cQb: 0,
 					sum:0
 				},
 				sCoinNum: { //根据所选择的钱币类型,实际传的参数
 					qbBalance: 0,
 					aQb: 0,
-					bQb: 0,
+					// bQb: 0,
 					cQb: 0,
 				},
 				yesShow: {
 					qbBalance: true,
 					aQb: false,
-					bQb: false,
+					// bQb: false,
 					cQb: false,
 				},
 				payWay: '支付宝',
@@ -471,7 +471,6 @@
 							oBank: this.WXSecond.oBank, //什么银行 //支付宝非银行
 						};
 					}
-					console.log(obj);
 //	                /userWith/submit
 					this.global.axiosGetReq('/userWith/submit', obj).then((res) => {
 						console.log(res);
@@ -604,9 +603,9 @@
 				this.global.axiosGetReq('/userWith/showUserQbNum', {}).then((res) => {
 					this.coinNum.qbBalance = res.data.data.qbBalance;
 					this.coinNum.aQb = res.data.data.cQb;
-					this.coinNum.bQb = res.data.data.bQb;
+					// this.coinNum.bQb = res.data.data.bQb;
 					this.coinNum.cQb = res.data.data.aQb;
-					this.coinNum.sum = this.coinNum.cQb + this.coinNum.bQb + this.coinNum.aQb +  this.coinNum.qbBalance;
+					this.coinNum.sum = this.coinNum.cQb + this.coinNum.aQb +  this.coinNum.qbBalance;
 					if(res.data.msg === '1') //提过
 					{
 						this.already = true;
@@ -614,10 +613,9 @@
 							console.log(res.data.data,'哈哈哈');
 							let qb = {};
 							qb.aQb = Math.ceil(Number(res.data.data.cType) / 0.95);
-							qb.bQb = Math.ceil(Number(res.data.data.bType) / 0.9);
+							// qb.bQb = Math.ceil(Number(res.data.data.bType) / 0.9);
 							qb.cQb = Math.ceil(Number(res.data.data.aType) / 0.8);
 							qb.qbBalance = Number(res.data.data.giveType);
-
 							for(let prop in qb)
 							{
 								this.tCoinNum[prop] = qb[prop];
@@ -642,8 +640,6 @@
 						});
 					}else { //没提过
 						if (res.data.callStatus === 'SUCCEED') {
-							console.log(res.data.data,"嘿嘿额黑");
-
 							this.iPhone = res.data.data.phone;
 							Object.assign(this.tCoinNum,this.coinNum);
 
@@ -660,11 +656,8 @@
 									this.yesShow[item] = false;
 								}
 							}
-
 						}
 					}
-
-
 				})
 			},
 		},

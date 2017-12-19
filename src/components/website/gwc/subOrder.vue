@@ -721,13 +721,17 @@
       that.haveSelectedGoodNum = arr.haveSelectedGoodNum
       that.canHasCoin = that.global.goodToMoney(that.fromGwc.details)
       var obj = {
-        token:that.global.getToken()
+        token:that.global.getToken(),
+        sumItemsPrice: that.gwcTotal.toFixed(2)
       };
-      that.global.axiosGetReq('/userMyQb/query', obj).then((res) => {
+      // /userMyQb/query
+      that.global.axiosPostReq('/po/Ded', obj).then((res) => {
         if (res.data.callStatus === 'SUCCEED') {
-          if(res.data.data.length>0){
-            that.allQb = res.data.data[0].user.qbBalance;
-            that.nowQb = res.data.data[0].user.qbBalance < that.gwcTotal ? res.data.data[0].user.qbBalance : that.gwcTotal;
+          if(res.data.data){
+            // that.allQb = res.data.data[0].user.qbBalance;
+            that.allQb = res.data.data;
+            // that.nowQb = res.data.data[0].user.qbBalance < that.gwcTotal ? res.data.data[0].user.qbBalance : that.gwcTotal;
+            that.nowQb = res.data.data < that.gwcTotal ? res.data.data : that.gwcTotal;
             that.qianbi_des = that.nowQb;
             that.qbDed();
           } else {
@@ -1008,22 +1012,23 @@
           var obj = {
             token:that.global.getToken(),
             qbnum: parseInt(that.qianbi_des),
+            sumItemsPrice: that.gwcTotal.toFixed(2)
           };
           that.global.axiosPostReq('/po/Ded', obj).then((res) => {
             if (res.data.callStatus === 'SUCCEED') {
-              if (res.data.msg == '余额充足') {
+              // if (res.data.msg == '余额充足') {
                 that.hasCount = true;
                 that.qbdk = that.qianbi_des;
                 that.isLoading = false;
-              } else {
+              // } else {
                 // that.$message.error(res.data.msg);
-                that.$message.error('乾币余额不足！');
-                that.hasCount = false;
-                that.isLoading = false;
-              }
-            } else {
+                // that.$message.error('乾币余额不足！');
+                // that.hasCount = false;
+                // that.isLoading = false;
+              // }
+            // } else {
               // that.$message.error('网络出错，请稍后再试！');
-              that.isLoading = false;
+              // that.isLoading = false;
             }
           })
         } else {
@@ -1405,8 +1410,6 @@
           // ordera: JSON.stringify( ordero ),
           // invoice: JSON.stringify( invoiceo ),
         }
-        console.log(obj,'90');
-        console.log(orderItem,'90');
         that.global.axiosPostReq('/po/generaOrder', obj).then((res) => {
           if (res.data.callStatus === 'SUCCEED') {
             if (res.data.data == null) {

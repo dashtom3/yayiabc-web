@@ -17,11 +17,11 @@
           <span class="fontColor">{{coinNum.aQb}}</span>
           <i class="borderRight"></i>
         </li>
-        <li>
+        <!-- <li>
           <img class="coinImgBig" src="../../../../images/center/coinMoney9.png" alt="">
           <span class="fontColor">{{coinNum.bQb}}</span>
           <i class="borderRight"></i>
-        </li>
+        </li> -->
         <li>
           <img class="coinImgBig" src="../../../../images/center/coinMoney8.png" alt="">
           <span class="fontColor">{{coinNum.cQb}}</span>
@@ -45,7 +45,7 @@
         <img v-show="ruleNum != 1" class="liImgNo" src="../../../../images/center/noCoin.png" alt="">
         <img v-show="ruleNum == 1"  class="liImgNo" src="../../../../images/center/yesCoin.png" alt="">
       </li>
-      <li  @click="ruleButton(2000)" class="ulSecondLi">
+      <!-- <li  @click="ruleButton(2000)" class="ulSecondLi">
         <div>
             <img class="coinImgSmall" src="../../../../images/center/coinMoney99.png" alt="">
         </div>
@@ -53,7 +53,7 @@
         <div class="saleRule">(&nbsp;1枚乾币售价&nbsp;:&nbsp;¥&nbsp;0.9&nbsp;)</div>
         <img v-show="ruleNum != 2000" class="liImgNo" src="../../../../images/center/noCoin.png" alt="">
         <img v-show="ruleNum == 2000" class="liImgNo" src="../../../../images/center/yesCoin.png" alt="">
-      </li>
+      </li> -->
       <li @click="ruleButton(5000)" class="ulSecondLi">
         <div>
             <img class="coinImgSmall" src="../../../../images/center/coinMoney88.png" alt="">
@@ -147,7 +147,7 @@
         coinNum: {
           qbBalance: 0,
           aQb: 0,
-          bQb: 0,
+          qbNotwtih: 0,
           cQb: 0,
           sum: 0
         },
@@ -181,9 +181,9 @@
           if (res.data.callStatus === 'SUCCEED') {
             this.coinNum.qbBalance = res.data.data.qbBalance;
             this.coinNum.aQb = res.data.data.cQb;
-            this.coinNum.bQb = res.data.data.bQb;
+            this.coinNum.qbNotwtih = res.data.data.qbNotwtih;
             this.coinNum.cQb = res.data.data.aQb;
-            this.coinNum.sum = this.coinNum.cQb + this.coinNum.bQb + this.coinNum.aQb +  this.coinNum.qbBalance;
+            this.coinNum.sum = this.coinNum.cQb + this.coinNum.aQb +  this.coinNum.qbBalance + this.coinNum.qbNotwtih;
           }
         })
       },
