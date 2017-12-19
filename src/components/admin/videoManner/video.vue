@@ -57,6 +57,15 @@
       <el-button class="btn_" @click="cancelVideo">取消</el-button>
     </div>
     </el-dialog>
+		<div class="block" v-show="this.totalCountList > this.pagesizeList">
+      <el-pagination
+        @current-change="handleCurrentChangeList"
+        :current-page.sync="currentPageList"
+        :page-size="pagesizeList"
+        layout="prev, pager, next, jumper"
+        :total="totalCountList">
+      </el-pagination>
+    </div>
   </el-row>
 </template>
 
@@ -75,7 +84,10 @@
 				video_link: '',
 				isEdit: false,
 				fileList: [],
-				ifPlaceHolder: ''
+				ifPlaceHolder: '',
+				totalCountList: 1,
+				pagesizeList: 10,
+				currentPageList: 1
 			}
 		},
 		created(){
@@ -95,10 +107,20 @@
 			}
 		},
 		methods: {
-			queryHandler(){
-				global.axiosPostReq('/vid/showVid',{}).then((res) => {
+			queryHandler(val){
+				if (val == undefined || typeof(val) == 'object') {
+          this.currentPageList = 1
+        } else {
+          this.currentPageList = val
+        }
+				var obj = {
+          currentPage: this.currentPageList,
+          numberPerpage: this.pagesizeList
+        }
+				global.axiosPostReq('/vid/showVid',obj).then((res) => {
           if (res.data.callStatus === 'SUCCEED') { 
             this.videoList = res.data.data
+						this.totalCountList = res.data.totalNumber
           }else{
             this.$message.error('查询失败！');
           }
@@ -174,11 +196,13 @@
 	          }else{
 	            this.$message.error('修改失败！');
 	          }
-	        })
-	        
-				}
-				
+	        }) 
+				}	
 			},
+			handleCurrentChangeList(val){
+        this.currentPageList = val 
+        this.queryHandler(val)
+      },
 			handleEdit(index, row){
 				this.videoVisible = true;
 				this.isEdit = true;

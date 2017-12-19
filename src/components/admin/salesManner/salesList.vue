@@ -58,7 +58,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <div class="block" style="position:absolute;top:502px;right:0;" v-show="this.totalCountNoBind > this.pagesizeNoBind">
+          <div class="block" v-show="this.totalCountNoBind > this.pagesizeNoBind">
             <el-pagination
               @current-change="handleCurrentChangeNoBind"
               :current-page.sync="currentPageNoBind"
@@ -95,7 +95,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <div class="block" style="position:absolute;top:502px;right:0;" v-show="this.totalCount > this.pagesize">
+          <div class="block" v-show="this.totalCount > this.pagesize">
             <el-pagination
               @current-change="handleCurrentChange"
               :current-page.sync="currentPage"
@@ -159,17 +159,17 @@
             </template>
             </el-table-column>
           </el-table>
-          <div class="block" style="position:absolute;top:458px;right:0;" v-show="this.totalCountWallet > this.pagesizeWallet">
-            <el-pagination
-              @current-change="handleCurrentWalletChange"
-              :current-page.sync="currentPageWallet"
-              :page-size="pagesizeWallet"
-              layout="prev, pager, next, jumper"
-              :total="totalCountWallet">
-            </el-pagination>
-          </div>
         </el-tab-pane>
       </el-tabs>
+      <div class="block" style="position:absolute;top:458px;right:0;" v-show="this.totalCountWallet > this.pagesizeWallet">
+        <el-pagination
+          @current-change="handleCurrentWalletChange"
+          :current-page.sync="currentPageWallet"
+          :page-size="pagesizeWallet"
+          layout="prev, pager, next, jumper"
+          :total="totalCountWallet">
+        </el-pagination>
+      </div>
     </el-dialog>
 
     <!-- 详情 -->

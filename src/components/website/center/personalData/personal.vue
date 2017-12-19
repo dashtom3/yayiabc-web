@@ -2,17 +2,20 @@
   <div class="personal">
     <div class="head">
       <span :class="{nowTabActive:1==currentTabs}" v-on:click="changeTabs(1)">个人信息</span>
+      <span :class="{nowTabActive:3==currentTabs}" v-on:click="changeTabs(3)">资质认证</span>
       <span :class="{nowTabActive:2==currentTabs}" v-on:click="changeTabs(2)">指定客服代表</span>
       <div style="clear:both"></div>
     </div>
     <certification v-show="1==currentTabs"></certification>
     <bindSale v-show="2==currentTabs"></bindSale>
+    <qualifications v-show="3==currentTabs"></qualifications>
   </div>
 </template>
 
 <script>
   import certification from "./certification"
   import bindSale from "./bindSale"
+  import qualifications from "./qualifications"
   import global from '../../../global/global'
   import util from '../../../../common/util'
   export default {
@@ -46,7 +49,8 @@
     },
     components:{
       certification,
-      bindSale
+      bindSale,
+      qualifications
     },
     methods:{
       changeTabs:function(index){

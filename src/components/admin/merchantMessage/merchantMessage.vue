@@ -498,7 +498,6 @@
           itemId: scope.row.itemId,
         }
         that.global.axiosPostReq('/item/itemDetailDes',obj).then((res) => {
-          console.log(res,'popop')
           if (res.data.callStatus === 'SUCCEED') {
             that.editCargo = res.data.data
             if (that.editCargo !== {}) {

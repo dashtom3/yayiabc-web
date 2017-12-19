@@ -47,7 +47,7 @@
         <el-form-item label="详细地址：" prop="workAddress">
           <el-input v-model.trim="certiData.workAddress" :disabled="ifPass"></el-input>
         </el-form-item>
-        <el-form-item label="类型：" prop="type">
+        <!-- <el-form-item label="类型：" prop="type">
           <el-select v-model="certiData.type" :change="adsf(certiData.type)" :disabled="ifPass">
             <el-option label="个人" value="1"></el-option>
             <el-option label="机构" value="2"></el-option>
@@ -183,9 +183,9 @@
           <transition name="shake">
             <p v-show="pending_validate" class="adopt">您的认证信息我们会尽快审核，请耐心等待~</p>
           </transition>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item>
-          <el-button type="primary" @click="savePersonInfo('certiData')" v-show="btnVisible">提交</el-button>
+          <el-button type="primary" @click="savePersonInfo('certiData')" v-show="btnVisible">保存</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -201,7 +201,7 @@
     data () {
       return {
         certificateState:0,//认证状态
-        sczgz:'',
+        sczgz:'personal',
         qiNiuToken: null,
         qiNiuUrl: global.qiNiuUrl,
         btnVisible: true,
@@ -247,18 +247,18 @@
           workAddress: [
             { required: true, message: '请输入详细地址', trigger: 'change' }
           ],
-          imageUrl_medical: [
-            { required: true, message: '请上传真实的医疗机构执业许可证', trigger: 'change' }
-          ],
-          imageUrl_business: [
-            { required: true, message: '请上传真实的营业执照', trigger: 'change' }
-          ],
-          imageUrl_tax: [
-            { required: true, message: '请上传真实的税务登记证', trigger: 'change' }
-          ],
-          imageUrl_doctorPic: [
-            { required: true, message: '请上传真实的医师执业资格证', trigger: 'change' }
-          ]
+          // imageUrl_medical: [
+          //   { required: true, message: '请上传真实的医疗机构执业许可证', trigger: 'change' }
+          // ],
+          // imageUrl_business: [
+          //   { required: true, message: '请上传真实的营业执照', trigger: 'change' }
+          // ],
+          // imageUrl_tax: [
+          //   { required: true, message: '请上传真实的税务登记证', trigger: 'change' }
+          // ],
+          // imageUrl_doctorPic: [
+          //   { required: true, message: '请上传真实的医师执业资格证', trigger: 'change' }
+          // ]
         }
       }
     },
@@ -303,7 +303,6 @@
             this.certiData.state = res.data.data.state
             this.certiData.failReason = res.data.data.failReason || '无'
             this.certiData.trueName = res.data.data.trueName
-            
             this.certiData.imageUrl_doctorPic = res.data.data.doctorPic
             this.certiData.imageUrl_head = res.data.data.userPic
             this.certiData.imageUrl_doctor = res.data.data.doctorPic
@@ -315,7 +314,7 @@
             this.certiData.imageUrl_id_front = res.data.data.idCardPositive
             this.certiData.imageUrl_id_back = res.data.data.idCardOtherside
             this.certificateState = this.certiData.state
-            this.ert(this.certiData.failReason);
+            // this.ert(this.certiData.failReason);
           }
         })
       },
@@ -340,8 +339,8 @@
         //保存个人信息
         global.axiosPostReq('/userPersonalInfo/updateCertification', params).then((res) => {
           if (res.data.callStatus === 'SUCCEED') {
-            this.ifPass = true;
-            this.btnVisible = false;
+            this.ifPass = false;
+            this.btnVisible = true;
           }
         })
       },
@@ -359,20 +358,23 @@
                 sex: this.certiData.sex,
                 birthday: this.certiData.birthday && util.formatDate.format(new Date(this.certiData.birthday)) || '1970-01-01',
                 userPic: this.certiData.imageUrl_head,
-                type: this.certiData.type,
-                companyName: this.certiData.companyName,
-                part: this.certiData.part.join("/"),
-                workAddress: this.certiData.workAddress,
-                doctorPic: this.certiData.imageUrl_doctorPic,//医师职业资格证
-                medicalLicense: '',//医疗机构执业许可证
-                businessLicense: '',//营业执照
-                taxRegistration: '',//税务登记证
-                openingPermit: '',//开户许可证
-                radiologicalPermit: '',//放射诊疗许可证
-                idCardPositive: '',//法人身份证（正面）
-                idCardOtherside: '',//法人身份证（反面）
+                // type: this.certiData.type,
+                // companyName: this.certiData.companyName,
+                // part: this.certiData.part.join("/"),
+                // workAddress: this.certiData.workAddress,
+                // doctorPic: this.certiData.imageUrl_doctorPic,//医师职业资格证
+                // medicalLicense: '',//医疗机构执业许可证
+                // businessLicense: '',//营业执照
+                // taxRegistration: '',//税务登记证
+                // openingPermit: '',//开户许可证
+                // radiologicalPermit: '',//放射诊疗许可证
+                // idCardPositive: '',//法人身份证（正面）
+                // idCardOtherside: '',//法人身份证（反面）
                 judge: this.certiData.judge
-              } 
+              }
+              params['certification.companyName'] = this.certiData.companyName
+              params['certification.part'] = this.certiData.part.join("/")
+              params['certification.workAddress'] = this.certiData.workAddress
             }else{
               params = {
                 phone: global.getUser().phone,
@@ -381,37 +383,49 @@
                 sex: this.certiData.sex,
                 birthday: this.certiData.birthday && util.formatDate.format(new Date(this.certiData.birthday)) || '1970-01-01',
                 userPic: this.certiData.imageUrl_head,
-                type: this.certiData.type,
-                companyName: this.certiData.companyName,
-                part: this.certiData.part.join("/"),
-                workAddress: this.certiData.workAddress,
-                doctorPic: this.certiData.imageUrl_doctor,//医师职业资格证
-                medicalLicense: this.certiData.imageUrl_medical,//医疗机构执业许可证
-                businessLicense: this.certiData.imageUrl_business,//营业执照
-                taxRegistration: this.certiData.imageUrl_tax,//税务登记证
-                openingPermit: this.certiData.imageUrl_open_permit,//开户许可证
-                radiologicalPermit: this.certiData.imageUrl_treatment,//放射诊疗许可证
-                idCardPositive: this.certiData.imageUrl_id_front,//法人身份证（正面）
-                idCardOtherside: this.certiData.imageUrl_id_back,//法人身份证（反面）
+                // type: this.certiData.type,
+                // companyName: this.certiData.companyName,
+                // part: this.certiData.part.join("/"),
+                // workAddress: this.certiData.workAddress,
+                // doctorPic: this.certiData.imageUrl_doctor,//医师职业资格证
+                // medicalLicense: this.certiData.imageUrl_medical,//医疗机构执业许可证
+                // businessLicense: this.certiData.imageUrl_business,//营业执照
+                // taxRegistration: this.certiData.imageUrl_tax,//税务登记证
+                // openingPermit: this.certiData.imageUrl_open_permit,//开户许可证
+                // radiologicalPermit: this.certiData.imageUrl_treatment,//放射诊疗许可证
+                // idCardPositive: this.certiData.imageUrl_id_front,//法人身份证（正面）
+                // idCardOtherside: this.certiData.imageUrl_id_back,//法人身份证（反面）
                 judge: this.certiData.judge
-              } 
+              }
+              params['certification.companyName'] = this.certiData.companyName
+              params['certification.part'] = this.certiData.part.join("/")
+              params['certification.workAddress'] = this.certiData.workAddress
             }
             //保存个人信息
             global.axiosPostReq('/userPersonalInfo/updateUser', params).then((res) => {
               if (res.data.callStatus === 'SUCCEED') {
-                global.axiosPostReq('/userPersonalInfo/updateCertification', params).then((res) => {
-                  if (res.data.callStatus === 'SUCCEED') {
-                    window.scrollTo(0, 0)
-                    this.$confirm('您的认证信息我们会尽快审核，请耐心等待~', '提示', {
-                      confirmButtonText: '确定',
-                      cancelButtonText: '取消',
-                      type: 'warning'
-                    })
-                    this.ifPass = true;
-                    this.btnVisible = false;
-                    this.pending_validate = true;
-                  }
-                }) 
+                window.scrollTo(0, 0)
+                this.$confirm('信息保存成功', '提示', {
+                  confirmButtonText: '确定',
+                  cancelButtonText: '取消',
+                  type: 'warning'
+                })
+                this.ifPass = false;
+                this.btnVisible = true;
+                this.pending_validate = true;
+                // global.axiosPostReq('/userPersonalInfo/updateCertification', params).then((res) => {
+                //   if (res.data.callStatus === 'SUCCEED') {
+                //     window.scrollTo(0, 0)
+                //     this.$confirm('您的认证信息我们会尽快审核，请耐心等待~', '提示', {
+                //       confirmButtonText: '确定',
+                //       cancelButtonText: '取消',
+                //       type: 'warning'
+                //     })
+                //     this.ifPass = false;
+                //     this.btnVisible = true;
+                //     this.pending_validate = true;
+                //   }
+                // }) 
               }
             }) 
           } else {
@@ -448,13 +462,13 @@
               this.saveJudge();
             }
           })
-          this.ifPass = true;
-          this.btnVisible = false;
+          this.ifPass = false;
+          this.btnVisible = true;
           this.audited_validate = false;
           this.pending_validate = true;
         }else if(this.certificateState==1 && this.certiData.judge===1){
-          this.ifPass = true;
-          this.btnVisible = false;
+          this.ifPass = false;
+          this.btnVisible = true;
           this.audited_validate = false;
           this.pending_validate = true;
         }else if(this.certificateState==2 && this.certiData.judge===0){
@@ -467,13 +481,13 @@
               this.saveJudge();
             }
           })
-          this.ifPass = true;
-          this.btnVisible = false;
+          this.ifPass = false;
+          this.btnVisible = true;
           this.audited_validate = true;
           this.pending_validate = false;
         }else if(this.certificateState==2 && this.certiData.judge===1){
-          this.ifPass = true;
-          this.btnVisible = false;
+          this.ifPass = false;
+          this.btnVisible = true;
           this.audited_validate = true;
           this.pending_validate = false;
         }else if(this.certificateState==3 && this.certiData.judge===0){
@@ -482,10 +496,10 @@
             type: 'warning',
             callback: action => {
               //不通过让他重新编辑
-              this.certiData.type = '1'
-              this.certiData.companyName = ''
-              this.certiData.part = ['北京','北京市','东城区']
-              this.certiData.workAddress = ''
+              // this.certiData.type = '1'
+              // this.certiData.companyName = ''
+              // this.certiData.part = ['北京','北京市','东城区']
+              // this.certiData.workAddress = ''
               this.certiData.imageUrl_doctorPic = ''
               this.certiData.imageUrl_doctor = ''
               this.certiData.imageUrl_medical = ''

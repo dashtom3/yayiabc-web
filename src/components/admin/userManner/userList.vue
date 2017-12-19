@@ -126,17 +126,24 @@
           <span v-else>性别：</span>
           <span>生日：{{someOneUserDetails.birthday}}</span>
         </div>
+        <div>
+          <span>单位名称：{{someOneUserDetails.companyName}}</span>
+          <span>所在地：{{someOneUserDetails.part}}</span>
+        </div>
+        <div>
+          <span>详细地址：{{someOneUserDetails.workAddress}}</span>
+        </div>
       </div>
       <div class="certification">
         <h3>资质认证</h3>
         <div>
           <span>类型：{{someOneUserDetails.type | calculateUserType}}</span>
-          <span>单位名称：{{someOneUserDetails.companyName}}</span>
+          <!-- <span>单位名称：{{someOneUserDetails.companyName}}</span> -->
         </div>
-        <div>
+        <!-- <div>
           <span>所在地：{{someOneUserDetails.part}}</span>
           <span>详细地址：{{someOneUserDetails.workAddress}}</span>
-        </div>
+        </div> -->
         <div>
           <div>医师执业资格证：</div>
           <img v-show="bigImgShow1" @click="bigImgShow1=false" style="width:100px;height:100px;display:block" :src="someOneUserDetails.doctorPic" alt="医师执业资格证"  v-if="someOneUserDetails.doctorPic">

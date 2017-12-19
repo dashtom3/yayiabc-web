@@ -17,7 +17,7 @@
         <el-form-item label="真实姓名：" prop="trueName">
           <el-input v-model.trim="registerData.trueName"></el-input>
         </el-form-item>
-        <el-form-item label="性别：">
+        <!-- <el-form-item label="性别：">
           <el-radio-group v-model="registerData.sex">
             <el-radio label="1">男</el-radio>
             <el-radio label="2">女</el-radio>
@@ -29,7 +29,7 @@
             type="date"
             placeholder="选择日期">
           </el-date-picker>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="单位名称：" prop="companyName">
           <el-input v-model.trim="registerData.companyName"></el-input>
         </el-form-item>
@@ -39,7 +39,7 @@
         <el-form-item label="详细地址：" prop="workAddress">
           <el-input v-model.trim="registerData.workAddress"></el-input>
         </el-form-item>
-        <el-form-item label="类型：" prop="type">
+        <!-- <el-form-item label="类型：" prop="type">
           <el-select v-model="registerData.type">
             <el-option label="个人" value="1"></el-option>
             <el-option label="机构" value="2"></el-option>
@@ -143,7 +143,7 @@
             <img v-if="registerData.imageUrl_id_back" :src="registerData.imageUrl_id_back" class="avatar" >
             <i class="el-icon-plus avatar-uploader-icon" v-else></i>
           </el-upload>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item prop="agreement">
           <el-checkbox v-model="registerData.agreement">我已阅读并同意</el-checkbox><span class="agreement" @click="handleAgree">牙医abc注册协议</span>
         </el-form-item>

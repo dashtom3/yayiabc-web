@@ -36,9 +36,9 @@
         </el-table-column>
         <el-table-column prop="withQbDetail" align="center" label="提现的乾币数(明细)">
           <template scope="scope">
-            <p>{{'免费:' + scope.row.withQbDetail[3] + '个'}}</p>
-            <p>{{'95折:' + scope.row.withQbDetail[2] + '个'}}</p>
-            <p>{{'9折:' + scope.row.withQbDetail[1] + '个'}}</p>
+            <p>{{'免费:' + scope.row.withQbDetail[2] + '个'}}</p>
+            <p>{{'95折:' + scope.row.withQbDetail[1] + '个'}}</p>
+            <!-- <p>{{'9折:' + scope.row.withQbDetail[1] + '个'}}</p> -->
             <p>{{'8折:' + scope.row.withQbDetail[0] + '个'}}</p>
           </template>
         </el-table-column>
@@ -139,9 +139,9 @@
                 result.push({
                   trueName: getMoneyList[i].trueName,
                   phone: getMoneyList[i].phone,
-                  withNum: (getMoneyList[i].userWithList[j].aType + getMoneyList[i].userWithList[j].bType + getMoneyList[i].userWithList[j].cType + getMoneyList[i].userWithList[j].giveType).toFixed(2),
-                  withQbNum: getMoneyList[i].userWithList[j].aType / 0.8 + getMoneyList[i].userWithList[j].bType / 0.9 + getMoneyList[i].userWithList[j].cType / 0.95 + getMoneyList[i].userWithList[j].giveType,
-                  withQbDetail: [getMoneyList[i].userWithList[j].aType / 0.8, getMoneyList[i].userWithList[j].bType / 0.9, getMoneyList[i].userWithList[j].cType / 0.95, getMoneyList[i].userWithList[j].giveType],
+                  withNum: (getMoneyList[i].userWithList[j].aType + getMoneyList[i].userWithList[j].cType + getMoneyList[i].userWithList[j].giveType).toFixed(2),
+                  withQbNum: getMoneyList[i].userWithList[j].aType / 0.8 + getMoneyList[i].userWithList[j].cType / 0.95 + getMoneyList[i].userWithList[j].giveType,
+                  withQbDetail: [getMoneyList[i].userWithList[j].aType / 0.8, getMoneyList[i].userWithList[j].cType / 0.95, getMoneyList[i].userWithList[j].giveType],
                   witType: getMoneyList[i].userWithList[j].witType,
                   accountHolder: getMoneyList[i].userWithList[j].accountHolder,
                   oBank: getMoneyList[i].userWithList[j].oBank,

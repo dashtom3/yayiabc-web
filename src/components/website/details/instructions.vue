@@ -4,7 +4,7 @@
       <div class="contentTitleWrap" v-if="imgShow">
         <img src="../../../images/brandLib/nouserInfo.png" alt="使用说明">
       </div>
-      <video :src="instruction.video" v-if="instruction.video !== ''" controls autoplay style="margin-top:20px;"></video>
+      <video width="800" height="450" :src="instruction.video" v-if="instruction.video !== ''" controls autoplay style="margin-top:20px;"></video>
       <div v-html="instruction.itemUse" v-if="instruction.itemUse !== '<p><br></p>'" style="width:640px;margin-top:20px;"></div>
     </div>
   </div>

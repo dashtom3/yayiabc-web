@@ -48,7 +48,7 @@
           </el-table-column>
           <el-table-column align="center" label="充值金额">
             <template scope="scope">
-              <span>{{scope.row.qbRget.substring(1, scope.row.qbRget.split(':')[0].length-3) * scope.row.qbRget.split(':')[1].substring(0, scope.row.qbRget.split(':')[1].length-1)}}元</span>
+              <span>{{scope.row.qbRget.substring(1, scope.row.qbRget.split(':')[0].length-3) / 10 * scope.row.qbRget.split(':')[1].substring(0, scope.row.qbRget.split(':')[1].length-1)}}元</span>
             </template>
           </el-table-column>
           <el-table-column align="center" prop="referer" label="支付方式">
@@ -170,15 +170,15 @@
       },
       // 查询充值记录
       rechargeCurrentChange(val) {
-        this.rechargeCurrentPage = val
+        this.currentPage = val
         this.searchRecharge(val)
       },
       searchRecharge:function(val){
         var that = this;
         if (val == undefined || typeof(val) == 'object') {
-          this.rechargeCurrentPage = 1
+          this.currentPage = 1
         } else {
-          this.rechargeCurrentPage = val
+          this.currentPage = val
         }
         var obj = {};
         // 搜索用户类型
@@ -201,14 +201,14 @@
           obj.orderCTime = that.rechargeCTime
           obj.orderETime = that.rechargeETime
         }
-        obj.currentPage = that.rechargeCurrentPage
+        obj.currentPage = that.currentPage
         obj.numberPerpage = that.pagesize
         that.global.axiosPostReq('/userQbList/queryQbRecord',obj)
         .then((res) => {
           if (res.data.callStatus === 'SUCCEED') {
             that.rechargeData = res.data.data;
-            that.rechargeCurrentPage = res.data.currentPage
-            that.rechargeTotalCount=res.data.totalNumber
+            that.currentPage = res.data.currentPage
+            that.totalCount=res.data.totalNumber;
             return
           }
           that.rechargeData = [];
@@ -217,9 +217,9 @@
       exportRecharge(val) {
         var that = this;
         if (val == undefined || typeof(val) == 'object') {
-          this.rechargeCurrentPage = 1
+          this.currentPage = 1
         } else {
-          this.rechargeCurrentPage = val
+          this.currentPage = val
         }
         var obj = {};
         // 搜索用户类型

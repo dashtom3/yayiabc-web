@@ -145,7 +145,7 @@
           </el-table-column>
           <el-table-column align="center" label="充值金额">
             <template scope="scope">
-              <span>{{scope.row.qbRget.substring(1, scope.row.qbRget.split(':')[0].length-3) * scope.row.qbRget.split(':')[1].substring(0, scope.row.qbRget.split(':')[1].length-1)}}元</span>
+              <span>{{scope.row.qbRget.substring(1, scope.row.qbRget.split(':')[0].length-3) / 10 * scope.row.qbRget.split(':')[1].substring(0, scope.row.qbRget.split(':')[1].length-1)}}元</span>
             </template>
           </el-table-column>
           <el-table-column align="center" prop="referer" label="支付方式">
